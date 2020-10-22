@@ -30,9 +30,11 @@ $(document).ready(function () {
         filter : '*'
     });
 
+    $('.portfolio-nav li[data-filter = "*"]').addClass('active')
+
     $('.portfolio-nav li').click(function() {
-        $('.portfolio-nav .current').removeClass('current');
-        $(this).addClass('current');
+        $('.portfolio-nav .active').removeClass('active');
+        $(this).addClass('active');
 
         var selector = $(this).attr('data-filter');
         container.isotope({

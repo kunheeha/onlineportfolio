@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kunhee Ha</title>
+
+	<!-- Meta tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="Kunhee Ha online portfolio" />
+	<meta name="author" content="Kunhee Ha" />
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Bootstrap/css/bootstrap.min.css') }}">
+	<!-- Font awesome -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto">
+	<!-- Fancybox -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fancybox/jquery.fancybox.min.css') }}">
+	<!-- Animate.css -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+	{% block head %}{% endblock %}
+</head>
+<body>
+	{% block content %}{% endblock %}
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="{{ url_for('static', filename='jquery/jquery.js') }}"></script>
+	<!-- Bootstrap -->
+	<script type="text/javascript" src="{{ url_for('static', filename='Bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+	<!-- jQuery Easing -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+	<!-- Fancybox -->
+	<script type="text/javascript" src="{{ url_for('static', filename='fancybox/jquery.fancybox.min.js') }}"></script>
+	<!-- Isotope -->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/isotope.pkgd.min.js') }}"></script>
+	<!-- WOW -->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+	<!-- My JS -->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/scriptx.js') }}"></script>
+
+</body>
+</html>
