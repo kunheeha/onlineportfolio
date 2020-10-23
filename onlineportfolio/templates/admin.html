@@ -1,4 +1,188 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}">
+
+{% endblock %}
+
 {% block content %}
+
+	<header>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="#">Kunhee Ha</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						{% if current_user.is_authenticated %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ url_for('login') }}">Login</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="bg-primary py-5 mb-5">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-lg-12">
+					<h2 class="display-4 text-white mt-5 mb-2">Edit</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+						{% for category, message in messages %}
+							<div class="alert alert-{{ category }}">
+								{{ message }}								
+							</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+		<!-- Intro Info -->
+		<div class="row">
+			<div class="col-md-8 mb-5">
+				<h2>Edit</h2>
+				<hr>
+				<div class="row">
+					<div class="col-md-4 imagediv">
+						<a data-fancybox data-src='#addImage' href=""><img src=""></a>
+					</div>
+					<div class="col-md-8">
+						<p>{{ current_user.personal_statement }}</p>
+						<div class="row">
+							<div class="col-md-6">
+								{% if not current_user.cv_file %}
+									<small><a data-fancybox data-src='#addCV' href="">Add CV</a></small>
+								{% elif current_user.cv_file %}
+									<form method="POST" action="">
+										{{ viewcvform.csrf_token }}
+										<small>{{ viewcvform.submit(class="looklikelink") }}</small>
+										<br>
+										<small><a data-fancybox data-src='#addCV' href="">Update CV</a></small>
+									</form>
+								{% endif %}
+							</div>
+							<div class="col-md-6 text-right">
+								<small><a data-fancybox data-src='#addDesc' href="">Edit</a></small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+			<div class="col-md-4 mb-5">
+				<h3>Misc Notes</h3>
+				<hr>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card degree">
+							<div class="card-body">
+								<h4 class="card-title">Note</h4>
+								<p class="card-text">Random notes about updating info on page if I need to</p>
+								<small><a data-fancybox data-src='' href="">Edit</a></small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Fancybox -->
+	<div style="display: none;" id="addCV">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12">
+	            	<h4>Upload CV file</h4>
+	            	<form method="POST" action="" enctype="multipart/form-data">
+	            		<div>
+	            			<div class="form-group">
+	            				{{ cvform.csrf_token }}
+	            				{{ cvform.cv_file(class="form-control-file") }}
+	            				{% if cvform.cv_file.errors %}
+	            					{% for error in cvform.cv_file.errors %}
+	            						<span class="text-danger">{{ error }}</span></br>
+	            					{% endfor %}
+	            				{% endif %}
+	            			</div>
+	            			<hr>
+	            			{{ cvform.submit(class="btn btn-lg btn-primary btn-block text-uppercase") }}
+	            		</div>
+	            	</form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div style="display: none;" id="addImage" enctype="multipart/form-data">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12">
+	            	<h4>Upload Profile Photo</h4>
+	            	<form method="POST" action="">
+	            		<div>
+	            			<div class="form-group">
+	            				{{ imageform.csrf_token }}
+	            				{{ imageform.image_file(class="form-control-file") }}
+	            				{% if imageform.image_file.errors %}
+	            					{% for error in imageform.image_file.errors %}
+	            						<span class="text-danger">{{ error }}</span></br>
+	            					{% endfor %}
+	            				{% endif %}
+	            			</div>
+	            			<hr>
+	            			{{ imageform.submit(class="btn btn-lg btn-primary btn-block text-uppercase") }}
+	            		</div>
+	            	</form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div style="display: none;" id="addDesc">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <h4>About Me</h4>
+	                <form id="aboutform" method="POST" action="">
+						<div class="form-group">
+							{{ aboutform.csrf_token }}
+
+							{% if aboutform.personal_statement.errors %}
+								{{ aboutform.personal_statement(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in aboutform.personal_statement.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ aboutform.personal_statement(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<hr>
+						{{ aboutform.submit(id="submitbutton", class="btn btn-lg btn-primary btn-block text-uppercase") }}
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
 {% endblock %}

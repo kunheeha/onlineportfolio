@@ -19,6 +19,14 @@ class AddCVForm(FlaskForm):
 class ViewCVForm(FlaskForm):
     submit = SubmitField('Download CV')
 
+
 class AboutForm(FlaskForm):
-	personal_statement = StringField('Personal Statement', validators=[DataRequired])
-	submit = SubmitField('Save')
+    personal_statement = StringField(
+        'Personal Statement', validators=[DataRequired()])
+    submit = SubmitField('Save')
+
+
+class AddImageForm(FlaskForm):
+    image_file = FileField('Update Profile Picture', validators=[
+                           FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Upload')

@@ -5,7 +5,7 @@ from flask import render_template, request, url_for, flash, redirect, send_from_
 from flask_login import login_user, logout_user, login_required
 from onlineportfolio import app, db, bcrypt
 from onlineportfolio.models import Person
-from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm
+from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm
 
 
 @app.route('/')
@@ -27,7 +27,15 @@ def login():
 @app.route('/admin')
 @login_required
 def admin():
-	addcv = AddCVForm()
-	aboutform = AboutForm()
+    cvform = AddCVForm()
+    aboutform = AboutForm()
+    viewcvform = ViewCVForm()
+    imageform = AddImageForm()
 
-    return render_template("admin.html")
+    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

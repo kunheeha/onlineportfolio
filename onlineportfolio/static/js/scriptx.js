@@ -88,4 +88,19 @@ $(document).ready(function () {
     );
     wow.init();
 
+    // Education and Strenghts section
+    var educationSection = $('.education-section');
+    var educationbtn = $('#educationbtn');
+    $('.education-section .active').removeClass('active');
+
+    educationbtn.on('click', function() {
+        if (educationSection.hasClass('active')) {
+            educationSection.removeClass('active');
+        } else if (!educationSection.hasClass('active')) {
+            educationSection.addClass('active');
+        }
+    });
+
+
+
 });
