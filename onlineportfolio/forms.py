@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Email, ValidationError
 
@@ -21,7 +21,7 @@ class ViewCVForm(FlaskForm):
 
 
 class AboutForm(FlaskForm):
-    personal_statement = StringField(
+    personal_statement = TextAreaField(
         'Personal Statement', validators=[DataRequired()])
     submit = SubmitField('Save')
 

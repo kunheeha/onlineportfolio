@@ -2,15 +2,23 @@ import os
 import secrets
 import random
 from flask import render_template, request, url_for, flash, redirect, send_from_directory, jsonify
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from onlineportfolio import app, db, bcrypt
 from onlineportfolio.models import Person
 from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template("index.html")
+    me = Person.query.first()
+    viewcvform = ViewCVForm()
+
+    if viewcvform.submit.data and viewcvform.validate():
+        cv = me.cv_file
+        mydirectory = os.path.join(app.root_path, 'static/cv')
+        return send_from_directory(directory=mydirectory, filename=cv)
+
+    return render_template("index.html", viewcvform=viewcvform, me=me)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -24,7 +32,17 @@ def login():
     return render_template("login.html", form=form)
 
 
-@app.route('/admin')
+def save_cv(form_cv):
+    name = 'KunheeHaCV'
+    _, f_ext = os.path.splitext(form_cv.filename)
+    cv_fn = name + f_ext
+    cv_path = os.path.join(app.root_path, 'static/cv', cv_fn)
+    form_cv.save(cv_path)
+
+    return cv_fn
+
+
+@app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
     cvform = AddCVForm()
@@ -32,7 +50,38 @@ def admin():
     viewcvform = ViewCVForm()
     imageform = AddImageForm()
 
-    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform)
+    if viewcvform.submit.data and viewcvform.validate():
+        me = Person.query.first()
+        cv = me.cv_file
+        mydirectory = os.path.join(app.root_path, 'static/cv')
+        return send_from_directory(directory=mydirectory, filename=cv)
+
+    if cvform.validate_on_submit():
+        if not current_user.cv_file:
+            if cvform.cv_file.data:
+                cv = save_cv(cvform.cv_file.data)
+                current_user.cv_file = cv
+                db.session.commit()
+                flash('Your CV has been uploaded', 'success')
+        elif current_user.cv_file:
+            if cvform.cv_file.data:
+                cvfilename = current_user.cv_file
+                path = os.path.join(app.root_path, 'static/cv', cvfilename)
+                os.remove(path)
+                cv = save_cv(cvform.cv_file.data)
+                current_user.cv_file = cv
+                db.session.commit()
+                flash('Your CV has been updated', 'success')
+
+    if aboutform.validate_on_submit():
+        current_user.personal_statement = aboutform.personal_statement.data
+        db.session.commit()
+        flash('Profile Updated', 'success')
+    elif request.method == 'GET':
+        if current_user.personal_statement:
+            aboutform.personal_statement.data = current_user.personal_statement
+
+    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform)
 
 
 @app.route('/logout')

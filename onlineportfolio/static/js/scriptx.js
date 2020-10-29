@@ -101,6 +101,13 @@ $(document).ready(function () {
         }
     });
 
+    // copy email to clipboard
+    $('.emailLink').on('click', function () {
+        const myEmail = 'kunheeha@gmail.com';
+        navigator.clipboard.writeText(myEmail).then(
+            function(){alert('Email copied to clipboard')});
+    });
+
 
 
 });

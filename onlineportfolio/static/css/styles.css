@@ -205,6 +205,10 @@ ul li {
   color: #FFF;
 }
 
+.header-info ul li a:hover {
+  cursor: pointer;
+}
+
 .header-info ul li .fa {
   margin-right: 15px;
   display: inline-block;
@@ -863,6 +867,14 @@ ul li {
   text-align: left;
 }
 
+.contact-info .contact-info-item .each-info .emailLink {
+  color: #21618C
+}
+
+.contact-info .contact-info-item .each-info .emailLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 
 
