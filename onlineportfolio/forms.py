@@ -30,3 +30,10 @@ class AddImageForm(FlaskForm):
     image_file = FileField('Update Profile Picture', validators=[
                            FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Upload')
+
+
+class RequestAddressForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    reason = StringField('Reason for needing address',
+                         validators=[DataRequired()])
+    submit = SubmitField('Request Address')

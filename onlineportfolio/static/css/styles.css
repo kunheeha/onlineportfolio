@@ -102,7 +102,7 @@ ul li {
 }
 
 #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #21618C;
+  color: #778899;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active {
@@ -219,7 +219,7 @@ ul li {
 }
 
 .header-info ul li:hover .fa {
-  color: #21618C;
+  color: #778899;
 }
 
 .header-info .social-icon {
@@ -440,8 +440,6 @@ ul li {
 .shadow-1 {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-/*  -webkit-box-shadow: 0px 10px 20px 4px #00000015;
-          box-shadow: 0px 10px 20px 4px #00000015;*/
 }
 
 
@@ -875,6 +873,40 @@ ul li {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.contact-form {
+  padding-top: 15px
+}
+
+
+
+.contact-section .form-control {
+  padding: 20px;
+  background-color: transparent;
+  border-color: #21618C;
+  margin-bottom: 20px;
+  height: 50px;
+  line-height: 50px;
+  color: #000000;
+}
+
+.contact-section .form-control:focus {
+  -webkit-box-shadow: 0 0px 2px 0 rgba(255, 255, 255, 0.8), 0 0px 1px 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0px 2px 0 rgba(255, 255, 255, 0.8), 0 0px 1px 1px rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+}
+
+.contact-section .contact-message {
+  color: #000000;
+  background-color: transparent;
+  border-color: #21618C;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 20px;
+  outline: none;
+}
+
 
 
 

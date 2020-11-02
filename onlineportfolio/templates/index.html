@@ -302,7 +302,7 @@
 												<h4>Address</h4>
 												<address>
 													Birmingham, UK<br>
-													<a href="">To request full address click here</a>
+													<a href="{{ url_for('address') }}">To request full address click here</a>
 												</address>
 											</div>
 										</div>
@@ -331,7 +331,25 @@
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-6 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-									<p>Hello</p>
+									<form class="contact-form" method="POST" action="">
+										<div class="row">
+											<div class="col-sm-12">
+												<input class="form-control" type="" name="" placeholder="First Name">
+											</div>
+											<div class="col-sm-12">
+												<input class="form-control" type="" name="" placeholder="Last Name">
+											</div>
+											<div class="col-sm-12">
+												<input class="form-control" type="" name="" placeholder="Email">
+											</div>
+											<div class="col-sm-12">
+												<textarea class="contact-message" placeholder="Message" rows="7"></textarea>
+											</div>
+											<div class="col-sm-12">
+												<button class="btn btn-fill btn-block">Send Message</button>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>

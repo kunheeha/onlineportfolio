@@ -3,9 +3,10 @@ import secrets
 import random
 from flask import render_template, request, url_for, flash, redirect, send_from_directory, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
-from onlineportfolio import app, db, bcrypt
+from flask_mail import Message
+from onlineportfolio import app, db, bcrypt, mail
 from onlineportfolio.models import Person
-from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm
+from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm, RequestAddressForm
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -19,6 +20,23 @@ def index():
         return send_from_directory(directory=mydirectory, filename=cv)
 
     return render_template("index.html", viewcvform=viewcvform, me=me)
+
+
+@app.route('/address', methods=['POST', 'GET'])
+def address():
+    form = RequestAddressForm()
+    if form.validate_on_submit():
+        visitoremail = form.email.data
+        reason = form.reason.data
+        toreceive = Message(subject='Address Request', sender=visitoremail,
+                            body=f'Sender: {visitoremail}. Reason : {reason}.', recipients=["kunheeha@gmail.com"])
+        tosend = Message(subject='Kunhee Ha Address', sender='kuheeha@gmail.com',
+                         body='19 Kestrel Grove, Birmingham, B30 1TQ', recipients=[visitoremail])
+        mail.send(toreceive)
+        mail.send(tosend)
+        flash('Your request has been received. Please check your email.', 'success')
+
+    return render_template("foraddress.html", form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
