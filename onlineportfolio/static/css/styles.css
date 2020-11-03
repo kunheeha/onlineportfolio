@@ -62,6 +62,26 @@ ul li {
   background-position: center center;
 }
 
+.btn {
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+  outline: 0;
+  padding: 8px 30px;
+  font-size: 90%;
+  letter-spacing: .09rem;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.btn.btn-fill:hover {
+  background-color: #174361;
+}
+
+.btn.btn-fill {
+  background-color: #21618C;
+  color: #fff;
+}
+
 /* NAVBAR */
 
 #mainNav {
@@ -791,6 +811,8 @@ ul li {
   margin-bottom: 10px;
   padding: 4px 0px;
   display: inline-block;
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .about-tag ul li span {

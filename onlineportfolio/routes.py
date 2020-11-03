@@ -30,10 +30,19 @@ def contact():
         senderName = fname + ' ' + lname
         senderEmail = request.form['email']
         sentmsg = request.form['message']
-        toreceive = Message(subject='Portfolio Message', sender=senderEmail,
-                            body=f'Sender: {senderName}, Email: {senderEmail}, Message: {sentmsg}', recipients=["kunheeha@gmail.com"])
+        # toreceive = Message(subject='Portfolio Message', sender='kunheeha@gmail.com',
+        #                     body=f'Sender: {senderName}, Email: {senderEmail}, Message: {sentmsg}', recipients=["kunheeha@gmail.com"])
+        # tosend = Message(subject='Message Received', sender='kunheeha@gmail.com',
+        #                  body='Your message has been received, I will get back to you shortly.', recipients=[senderEmail])
+
+        toreceive = Message(subject='Portfolio Message', sender='kunheeha@gmail.com',
+                            recipients=["kunheeha@gmail.com"])
         tosend = Message(subject='Message Received', sender='kunheeha@gmail.com',
-                         body='Your message has been received, I will get back to you shortly.', recipients=[senderEmail])
+                         recipients=[senderEmail])
+        toreceive.html = render_template(
+            'message.html', senderName=senderName, senderEmail=senderEmail, sentmsg=sentmsg)
+        tosend.html = render_template(
+            'autorespond.html', senderName=senderName)
 
         try:
             mail.send(toreceive)
