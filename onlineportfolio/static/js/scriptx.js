@@ -108,6 +108,38 @@ $(document).ready(function () {
             function(){alert('Email copied to clipboard')});
     });
 
+    // Contact form
+    var contactform = $('.contact-form');
+    var displayMsg = $('.formMessages');
+    contactform.submit(function(event) {
+        event.preventDefault();
+        displayMsg.addClass('alert');
+        displayMsg.addClass('alert-info');
+        displayMsg.text('Please wait');
+        var formData = contactform.serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/contact',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                if (response.status) {
+                    displayMsg.removeClass('alert-info');
+                    displayMsg.addClass('alert-success');
+                    displayMsg.text('Your message has been sent. Please check your email');
+                    $('#inputFname').val('');
+                    $('#inputLname').val('');
+                    $('#inputEmail').val('');
+                    $('#inputMessage').val('');
+                } else if (!response.status) {
+                    displayMsg.removeClass('alert-info');
+                    displayMsg.addClass('alert-danger');
+                    displayMsg.text('Message failed to send. Please check you have filled in the form correctly');
+                }
+            }
+        });
+    });
+
 
 
 });

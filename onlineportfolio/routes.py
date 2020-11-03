@@ -14,12 +14,34 @@ def index():
     me = Person.query.first()
     viewcvform = ViewCVForm()
 
-    if viewcvform.submit.data and viewcvform.validate():
+    if viewcvform.cvsubmit.data and viewcvform.validate():
         cv = me.cv_file
         mydirectory = os.path.join(app.root_path, 'static/cv')
         return send_from_directory(directory=mydirectory, filename=cv)
 
     return render_template("index.html", viewcvform=viewcvform, me=me)
+
+
+@app.route('/contact', methods=['POST', 'GET'])
+def contact():
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        senderName = fname + ' ' + lname
+        senderEmail = request.form['email']
+        sentmsg = request.form['message']
+        toreceive = Message(subject='Portfolio Message', sender=senderEmail,
+                            body=f'Sender: {senderName}, Email: {senderEmail}, Message: {sentmsg}', recipients=["kunheeha@gmail.com"])
+        tosend = Message(subject='Message Received', sender='kunheeha@gmail.com',
+                         body='Your message has been received, I will get back to you shortly.', recipients=[senderEmail])
+
+        try:
+            mail.send(toreceive)
+            mail.send(tosend)
+            return jsonify(status=True)
+
+        except:
+            return jsonify(status=False)
 
 
 @app.route('/address', methods=['POST', 'GET'])

@@ -17,7 +17,7 @@ class AddCVForm(FlaskForm):
 
 
 class ViewCVForm(FlaskForm):
-    submit = SubmitField('Download CV')
+    cvsubmit = SubmitField('Download CV')
 
 
 class AboutForm(FlaskForm):
@@ -37,3 +37,11 @@ class RequestAddressForm(FlaskForm):
     reason = StringField('Reason for needing address',
                          validators=[DataRequired()])
     submit = SubmitField('Request Address')
+
+
+# class ContactForm(FlaskForm):
+#     fname = StringField('First Name', validators=[DataRequired()])
+#     lname = StringField('Last Name', validators=[DataRequired()])
+#     email = StringField('Email', validators=[DataRequired(), Email()])
+#     message = TextAreaField('Message', validators=[DataRequired()])
+#     submit = SubmitField('Send Message')

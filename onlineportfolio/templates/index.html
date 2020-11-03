@@ -126,7 +126,7 @@
                     </div>
                 </div>
 				<div class="about-cv text-center wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
-					<button id="educationbtn" class="btn btn-fill">Education and Strenghts</button>
+					<button id="educationbtn" class="btn btn-fill btn-secondary">Education and Strenghts</button>
 				</div>
             </div>
         </section>
@@ -245,7 +245,7 @@
                                     <li><span>flask</span></li>
                                 </ul>
 							</div>
-							<a target="_blank" href="https://donationsitetest.herokuapp.com/" class="btn btn-fill">Go to Website</a>
+							<a target="_blank" href="https://donationsitetest.herokuapp.com/" class="btn btn-fill btn-secondary">Go to Website</a>
 						</div>
 						<div class="col-sm-7">
 							<div class="portfolio-modal-img">
@@ -269,9 +269,9 @@
 					<div class="extrapart col-sm-12 col-md-6">
 						<h3 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Interested to Work?</h3>
 						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">Lorem ipsum text</p>
-						<form method="POST">
-							{{ viewcvform.csrf_token }}
-							{{ viewcvform.submit(class="btn btn-fill") }}
+						<form class="cvform" method="POST">
+							{{ viewcvform.hidden_tag() }}
+							{{ viewcvform.cvsubmit(class="btn btn-fill btn-secondary") }}
 						</form>
 					</div>
 				</div>
@@ -331,25 +331,33 @@
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-6 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-									<form class="contact-form" method="POST" action="">
-										<div class="row">
-											<div class="col-sm-12">
-												<input class="form-control" type="" name="" placeholder="First Name">
-											</div>
-											<div class="col-sm-12">
-												<input class="form-control" type="" name="" placeholder="Last Name">
-											</div>
-											<div class="col-sm-12">
-												<input class="form-control" type="" name="" placeholder="Email">
-											</div>
-											<div class="col-sm-12">
-												<textarea class="contact-message" placeholder="Message" rows="7"></textarea>
-											</div>
-											<div class="col-sm-12">
-												<button class="btn btn-fill btn-block">Send Message</button>
-											</div>
+									<div class="card card-contact">
+										<div class="card-body">
+											<div class="formMessages"></div>
+											<form class="contact-form" method="POST" action="">
+												<div>
+													<div class="form-label-group">
+														<input id="inputFname" type="text" name="fname" class="form-control" placeholder="First Name" required>
+														<label for="inputFname">First Name</label>
+													</div>
+													<div class="form-label-group">
+														<input id="inputLname" type="text" name="lname" class="form-control" placeholder="Last Name" required>
+														<label for="inputLname">Last Name</label>
+													</div>
+													<div class="form-label-group">
+														<input id="inputEmail" type="email" name="email" class="form-control" placeholder="Email" required>
+														<label for="inputEmail">Email</label>
+													</div>
+													<div class="form-label-group">
+														<textarea id="inputMessage" class="form-control" name="message" placeholder="Message" rows="6" required></textarea>
+														<label for="inputMessage">Message</label>
+													</div>
+													<hr>
+													<button type="submit" class="btn btn-block btn-dark">Send Message</button>
+												</div>
+											</form>
 										</div>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>

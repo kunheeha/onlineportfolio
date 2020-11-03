@@ -75,7 +75,7 @@
 								{% elif current_user.cv_file %}
 									<form method="POST" action="">
 										{{ viewcvform.csrf_token }}
-										<small>{{ viewcvform.submit(class="looklikelink") }}</small>
+										<small>{{ viewcvform.cvsubmit(class="looklikelink") }}</small>
 										<br>
 										<small><a data-fancybox data-src='#addCV' href="">Update CV</a></small>
 									</form>
