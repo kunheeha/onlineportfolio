@@ -30,11 +30,6 @@ def contact():
         senderName = fname + ' ' + lname
         senderEmail = request.form['email']
         sentmsg = request.form['message']
-        # toreceive = Message(subject='Portfolio Message', sender='kunheeha@gmail.com',
-        #                     body=f'Sender: {senderName}, Email: {senderEmail}, Message: {sentmsg}', recipients=["kunheeha@gmail.com"])
-        # tosend = Message(subject='Message Received', sender='kunheeha@gmail.com',
-        #                  body='Your message has been received, I will get back to you shortly.', recipients=[senderEmail])
-
         toreceive = Message(subject='Portfolio Message', sender='kunheeha@gmail.com',
                             recipients=["kunheeha@gmail.com"])
         tosend = Message(subject='Message Received', sender='kunheeha@gmail.com',
