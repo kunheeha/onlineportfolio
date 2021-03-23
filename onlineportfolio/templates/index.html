@@ -61,8 +61,6 @@
               	<ul>
               		<li><span>Flask</span></li>
               		<li><span>Django</span></li>
-              		<li><span>Node.js</span></li>
-              		<li><span>React</span></li>
               	</ul>
               </div>
               <form class="cvform" method="POST">
@@ -92,11 +90,55 @@
 								<div class="lang">
 									<div class="parcial">
 										<div class="info">
-											<div class="name">Javascript</div>
+											<div class="name">HTML, CSS, Vanilla Javascript</div>
+											<div class="percentagem-num">Proficient</div>
+										</div>
+										<div class="progressBar">
+											<div class="percentagem" style="width: 90%;"></div>
+										</div>
+									</div>
+								</div>
+								<div class="lang">
+									<div class="parcial">
+										<div class="info">
+											<div class="name">ES6</div>
 											<div class="percentagem-num">Learning</div>
 										</div>
 										<div class="progressBar">
-											<div class="percentagem" style="width: 50%;"></div>
+											<div class="percentagem" style="width: 60%;"></div>
+										</div>
+									</div>
+								</div>
+								<div class="lang">
+									<div class="parcial">
+										<div class="info">
+											<div class="name">React.js</div>
+											<div class="percentagem-num">Learning</div>
+										</div>
+										<div class="progressBar">
+											<div class="percentagem" style="width: 40%;"></div>
+										</div>
+									</div>
+								</div>
+								<div class="lang">
+									<div class="parcial">
+										<div class="info">
+											<div class="name">Flask</div>
+											<div class="percentagem-num">Proficient</div>
+										</div>
+										<div class="progressBar">
+											<div class="percentagem" style="width: 80%;"></div>
+										</div>
+									</div>
+								</div>
+								<div class="lang">
+									<div class="parcial">
+										<div class="info">
+											<div class="name">Django</div>
+											<div class="percentagem-num">Proficient</div>
+										</div>
+										<div class="progressBar">
+											<div class="percentagem" style="width: 75%;"></div>
 										</div>
 									</div>
 								</div>
@@ -143,9 +185,9 @@
 										<img src="{{ url_for('static', filename='images/portfolio/donationsite.png') }}">
 										<figcaption>
 											<i class="fa fa-search"></i>
-											<h5 class="title">Donation Webpage</h5>
+											<h5 class="title">Online Workspace</h5>
 											<span class="sub-title">Personal Project</span>
-											<a data-fancybox data-src="#donationsite"></a>
+											<a data-fancybox data-src="#workspace"></a>
 										</figcaption>
 									</figure>
 								</div>
@@ -159,26 +201,60 @@
 					<div class="portfolio-modal-inner row">
 						<div class="col-sm-5">
 							<h2>Donation Webpage</h2>
-							<p>Personal project of building a donation website using Flask as framework.</p>
-							<p>Second Paragraph if need be.</p>
+							<p>Donation website with stripe implementation built with Flask. Users can register and login to set up their own profile on the site to receive donations.</p>
+							<p>Please feel free to test out the stripe implementation since it's active and will actually charge you money.</p>
 							<div class="about-tag">
 								<ul>
-                                    <li><span>html</span></li>
-                                    <li><span>css</span></li>
-                                    <li><span>javascript</span></li>
-                                    <li><span>python</span></li>
-                                    <li><span>flask</span></li>
+									<li><span>Python</span></li>
+                                    <li><span>Flask</span></li>
+                                    <li><span>NGINX</span></li>
+                                    <li><span>Gunicorn</span></li>
+                                    <li><span>Linux Server</span></li>
+                                    <li><span>Stripe</span></li>
+                                    <li><span>AJAX</span></li>
+                                    <li><span>HTML</span></li>
+                                    <li><span>CSS</span></li>
+                                    <li><span>Javascript</span></li>
                                 </ul>
 							</div>
-							<a target="_blank" href="https://donationsitetest.herokuapp.com/" class="btn btn-fill btn-secondary">Go to Website</a>
+							<a target="_blank" href="https://www.donate2grads.com/" class="btn btn-fill btn-secondary">Go to Website</a> or 
+							<a target="_blank" href="https://github.com/kunheeha/DonationSite">View source code</a>
 						</div>
 						<div class="col-sm-7">
 							<div class="portfolio-modal-img">
 								<img src="{{ url_for('static', filename='images/portfolio/donationsiteeg1.png') }}">
-								<p>About the website</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="portfolio-modal" id="workspace">
+				<div class="container">
+					<div class="portfolio-modal-inner row">
+						<div class="col-sm-5">
+							<h2>Online Workspace</h2>
+							<p>Web application to store and organise relevant files, list of tasks and notes for different projects in their corresponding 'online workspace'. Able to invite multiple users to your workspaces or join ones of others, a viable solution for handling group projects where all relevant files, tasks and notes are in one place organised into notebooks and folders in each of the workspaces.</p>
+							<p>Users can create unlimited tasks, notebooks and notes, and folders to upload files to in each of the workspaces. Limit of one workspace per user with the option of a premium subscription for unlimited workspaces</p>
+							<div class="about-tag">
+								<ul>
+									<li><span>Python</span></li>
+                                    <li><span>Django</span></li>
+                                    <li><span>PostgreSQL</span></li>
+                                    <li><span>NGINX</span></li>
+                                    <li><span>Linux Server</span></li>
+                                    <li><span>Stripe</span></li>
+                                    <li><span>AJAX</span></li>
+                                    <li><span>HTML</span></li>
+                                    <li><span>CSS</span></li>
+                                    <li><span>Javascript</span></li>
+                                </ul>
+							</div>
+							<a target="_blank" href="#" class="btn btn-fill btn-secondary">Go to Website</a> or 
+							<a target="_blank" href="#">View source code</a>
+						</div>
+						<div class="col-sm-7">
+							<div class="portfolio-modal-img">
 								<img src="{{ url_for('static', filename='images/portfolio/donationsiteeg1.png') }}">
-								<p>About the website.</p>
-                                <a target="_blank" href="https://github.com/kunheeha/DonationSite">To view the source code click here.</a>
 							</div>
 						</div>
 					</div>
