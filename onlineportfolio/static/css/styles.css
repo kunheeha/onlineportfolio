@@ -85,36 +85,30 @@ ul li {
 /* NAVBAR */
 
 #mainNav {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  background-color: #808080;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: none;
+  background-color: transparent;
+  transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
 }
 
-#mainNav .navbar-toggler {
-  padding: 0.75rem;
-  font-family: Roboto, sans-serif;
-  font-size: 0.75rem;
-  color: #fff;
-  text-transform: uppercase;
-  background-color: #676767;
-  border: 0;
+#mainNav.navbar-shrink {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+  transition: 0.4s;
 }
-#mainNav .navbar-brand {
-  color: #21618C;
-  font-family: Roboto, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.0625em;
-  text-transform: uppercase;
+
+#mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
+  color: #000
 }
-#mainNav .navbar-brand img {
-  height: 1.5rem;
-}
+
 #mainNav .navbar-nav .nav-item .nav-link {
   font-family: Roboto, sans-serif;
   font-size: 15px;
   color: #fff;
   letter-spacing: 0.0625em;
-  font-weight: bold;
   opacity: 1;
   line-height: 30px;
   padding-left: 0;
@@ -130,7 +124,7 @@ ul li {
   border-bottom: 1.5px solid;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 575px) {
   #mainNav {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -138,14 +132,7 @@ ul li {
     background-color: transparent;
     transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
   }
-  #mainNav .navbar-brand {
-    font-size: 1.5em;
-    transition: font-size 0.3s ease-in-out;
-  }
-  #mainNav .navbar-brand img {
-    height: 2rem;
-    transition: height 0.3s ease-in-out;
-  }
+
   #mainNav.navbar-shrink {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -156,6 +143,19 @@ ul li {
 
   #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
     color: #000
+  }
+
+  #mainNav .navbar-nav .nav-item .nav-link {
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 0.0625em;
+    font-weight: bold;
+    opacity: 1;
+    line-height: 30px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 10px;
   }
 
   #mainNav.navbar-shrink .navbar-brand {
@@ -315,6 +315,7 @@ ul li {
 }
 
 
+
 /* ABOUT */
 
 
@@ -415,6 +416,19 @@ ul li {
 
 .about-cv {
   padding-bottom: 30px;
+}
+
+
+@media (max-width: 767px) {
+  .about-section-separator {
+    padding-top: 30px;
+    padding-bottom: 40px;
+  }
+
+  .aboutMain {
+    margin: auto;
+    text-align: center;
+  }
 }
 
 /* SKILLS */

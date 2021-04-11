@@ -60,7 +60,7 @@ $(document).ready(function () {
 
     // Collapse navbar
     var navbarCollapse = function () {
-        if ($("#mainNav").offset().top > 100) {
+        if ($("#mainNav").offset().top > 180) {
             $("#mainNav").addClass("navbar-shrink");
         } else {
             $("#mainNav").removeClass("navbar-shrink");
@@ -70,6 +70,7 @@ $(document).ready(function () {
     navbarCollapse();
     // Collapse navbar on scroll
     $(window).scroll(navbarCollapse);
+
 
     // WOW
     var wow = new WOW(

@@ -56,11 +56,8 @@ def address():
         reason = form.reason.data
         toreceive = Message(subject='Address Request', sender=visitoremail,
                             body=f'Sender: {visitoremail}. Reason : {reason}.', recipients=["kunheeha@gmail.com"])
-        tosend = Message(subject='Kunhee Ha Address', sender='kuheeha@gmail.com',
-                         body='19 Kestrel Grove, Birmingham, B30 1TQ', recipients=[visitoremail])
         mail.send(toreceive)
-        mail.send(tosend)
-        flash('Your request has been received. Please check your email.', 'success')
+        flash('Your request has been received. Please await an email response', 'success')
 
     return render_template("foraddress.html", form=form)
 
@@ -94,7 +91,7 @@ def admin():
     viewcvform = ViewCVForm()
     imageform = AddImageForm()
 
-    if viewcvform.submit.data and viewcvform.validate():
+    if viewcvform.cvsubmit.data and viewcvform.validate():
         me = Person.query.first()
         cv = me.cv_file
         mydirectory = os.path.join(app.root_path, 'static/cv')
