@@ -20,11 +20,11 @@
 					<div class="row section-separator home-padding">
 						<div class="col-md-6 col-xs-12 d-block">
 							<div class="header-info">
-								<h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Kunhee Ha</h2>
+                                <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ developer.name }}</h2>
 								<h4 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">Developer</h4>
 								<ul>
-									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"><i class="fa fa-envelope"></i><a class="emailLink">kunheeha@gmail.com</a></li>
-									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s"><i class="fa fa-phone"></i><a href="tel:++447407316920">+44 7947513711</a></li>
+                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"><i class="fa fa-envelope"></i><a class="emailLink">{{ developer.email }}</a></li>
+                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s"><i class="fa fa-phone"></i><a href="tel:{{ developer.phone }}">{{ developer.phone }}</a></li>
 									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s"><i class="fa fa-map-marker"></i><address>Birmingham, UK</address></li>
 								</ul>
 								<ul class="social-icon wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
@@ -36,7 +36,7 @@
 						</div>
 						<div class="col-md-6 d-none d-sm-none d-md-block">
 							<div class="p-img wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
-								<img src="{{ url_for('static', filename='images/ProfilePhoto.jpg') }}" alt=""  class="img-fluid">
+                                <img src="{{ profile_photo }}" alt=""  class="img-fluid">
 							</div>
 						</div>
 					</div>
@@ -51,8 +51,7 @@
 					<div class="col-sm-12 col-md-6 aboutMain">
 						<div class="about-inner">
 							<h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">About</h2>
-							{# <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ me.personal_statement }}</p> #}
-							<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Looking for a web developer?<br>I create effective and user-friendly web solutions. Usually with Django or Flask, and it's associated stack: PostgreSQL, Gunicorn, Nginx.<br>Please feel free to explore some of what I've worked on listed below, and view their source code on my github.</p>
+                            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ developer.personal_statement }}</p>
 							<div class="about-tag">
               	<ul>
               		<li><span>Flask</span></li>

@@ -17,3 +17,41 @@ class Person(db.Model, UserMixin):
 
     def __repr__(self, *args):
         return f"'{self.name}', '{self.email}'"
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(12), unique=True, nullable=False)
+    profile_photo = db.Column(db.String(20), nullable=True)
+    cv_file = db.Column(db.String(20), nullable=True)
+    personal_statement = db.Column(db.Text(), nullable=False)
+
+class Skill(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    skill_name = db.Column(db.String(30), nullable=False)
+    proficiency_level = db.Column(db.Integer(), nullable=False)
+
+class SoftwareProject(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    source_code = db.Column(db.String(50), nullable=False)
+    windows_file = db.Column(db.String(20), nullable=True)
+    macos_file = db.Column(db.String(20), nullable=True)
+    linux_file = db.Column(db.String(20), nullable=True)
+    description = db.Column(db.Text(), nullable=False)
+    installation_guide = db.Column(db.String(20), nullable=True)
+    user_guide = db.Column(db.String(20), nullable=True)
+    upcoming_functionality = db.Column(db.Text(), nullable=True)
+    images = db.Column(db.String(50), nullable=False)
+
+class WebProject(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    source_code = db.Column(db.String(50), nullable=False)
+    link = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
+    user_guide = db.Column(db.String(20), nullable=True)
+    upcoming_functionality = db.Column(db.Text(), nullable=True)
+    images = db.Column(db.String(50), nullable=False)
