@@ -33,6 +33,20 @@ class Skill(db.Model):
     skill_name = db.Column(db.String(30), nullable=False)
     proficiency_level = db.Column(db.Integer(), nullable=False)
 
+class PSkill(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+
+class WebProjectSkills(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    web_project_id = db.Column(db.Integer(), db.ForeignKey('web_project.id', ondelete='CASCADE'))
+    p_skill_id = db.Column(db.Integer(), db.ForeignKey('p_skill.id', ondelete='CASCADE'))
+
+class SoftwareProjectSkills(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    software_project_id = db.Column(db.Integer(), db.ForeignKey('software_project.id', ondelete='CASCADE'))
+    p_skill_id = db.Column(db.Integer(), db.ForeignKey('p_skill.id', ondelete='CASCADE'))
+
 class SoftwareProject(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(30), nullable=False)
@@ -45,6 +59,7 @@ class SoftwareProject(db.Model):
     user_guide = db.Column(db.String(20), nullable=True)
     upcoming_functionality = db.Column(db.Text(), nullable=True)
     images = db.Column(db.String(50), nullable=False)
+    skills = db.relationship('PSkill', secondary='software_project_skills')
 
 class WebProject(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -55,3 +70,4 @@ class WebProject(db.Model):
     user_guide = db.Column(db.String(20), nullable=True)
     upcoming_functionality = db.Column(db.Text(), nullable=True)
     images = db.Column(db.String(50), nullable=False)
+    skills = db.relationship('PSkill', secondary='web_project_skills')
