@@ -13,15 +13,18 @@ from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, A
 def index():
     developer = User.query.first()
     profile_photo = url_for('static', filename='images/'+developer.profile_photo)
-    me = Person.query.first()
     viewcvform = ViewCVForm()
+    skills = Skill.query.all()
+    softwareprojects = SoftwareProject.query.all()
+    webprojects = WebProject.query.all()
+
 
     if viewcvform.cvsubmit.data and viewcvform.validate():
-        cv = me.cv_file
+        cv = developer.cv_file
         mydirectory = os.path.join(app.root_path, 'static/cv')
         return send_from_directory(directory=mydirectory, filename=cv)
 
-    return render_template("index.html", viewcvform=viewcvform, me=me, developer=developer, profile_photo=profile_photo)
+    return render_template("index.html", viewcvform=viewcvform, developer=developer, profile_photo=profile_photo, skills=skills, softwareprojects=softwareprojects, webprojects=webprojects)
 
 
 @app.route('/contact', methods=['POST', 'GET'])

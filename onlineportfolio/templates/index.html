@@ -2,208 +2,159 @@
 
 {% block content %}
 
-		<!-- Navigation-->
-		<nav class="navbar navbar-expand navbar-dark fixed-top" id="mainNav">
-			<div class="container">
-				<a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="" /></a>
-				<ul class="navbar-nav text-uppercase ml-auto">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-				</ul>
-			</div>
-		</nav>
-		<!-- HOME -->
-		<header class="home-header">
-			<div class="bg-image">
-				<div class="container">
-					<div class="row section-separator home-padding">
-						<div class="col-md-6 col-xs-12 d-block">
-							<div class="header-info">
-                                <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ developer.name }}</h2>
-								<h4 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">Developer</h4>
-								<ul>
-                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"><i class="fa fa-envelope"></i><a class="emailLink">{{ developer.email }}</a></li>
-                                    <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s"><i class="fa fa-phone"></i><a href="tel:{{ developer.phone }}">{{ developer.phone }}</a></li>
-									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s"><i class="fa fa-map-marker"></i><address>Birmingham, UK</address></li>
-								</ul>
-								<ul class="social-icon wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
-									<li><a target="_blank" href="https://www.linkedin.com/in/kunheeha/"><i class="fa fa-linkedin-square"></i></a></li>
-									<li><a target="_blank" href="https://github.com/kunheeha/"><i class="fa fa-github"></i></a></li>
-									<li><a target="_blank" href="https://stackoverflow.com/users/14336257/kunheeha"><i class="fa fa-stack-overflow"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-6 d-none d-sm-none d-md-block">
-							<div class="p-img wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
-                                <img src="{{ profile_photo }}" alt=""  class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="" /></a>
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- HOME -->
+  <header class="home-header">
+    <div class="bg-image">
+      <div class="container">
+        <div class="row section-separator home-padding">
+          <div class="col-md-6 col-xs-12 d-block">
+            <div class="header-info">
+              <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ developer.name }}</h2>
+              <h4 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">Developer</h4>
+              <ul>
+                <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"><i class="fa fa-envelope"></i><a class="emailLink">{{ developer.email }}</a></li>
+                <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s"><i class="fa fa-phone"></i><a href="tel:{{ developer.phone }}">{{ developer.phone }}</a></li>
+                <li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s"><i class="fa fa-map-marker"></i><address>Birmingham, UK</address></li>
+              </ul>
+              <ul class="social-icon wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
+                <li><a target="_blank" href="https://www.linkedin.com/in/kunheeha/"><i class="fa fa-linkedin-square"></i></a></li>
+                <li><a target="_blank" href="https://github.com/kunheeha/"><i class="fa fa-github"></i></a></li>
+                <li><a target="_blank" href="https://stackoverflow.com/users/14336257/kunheeha"><i class="fa fa-stack-overflow"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 d-none d-sm-none d-md-block">
+            <div class="p-img wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+              <img src="{{ profile_photo }}" alt=""  class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-		<!-- ABOUT -->
-		<section class="about-section" id="about">
-			<div class="container">
-				<div class="row about-section-separator">
-					<div class="col-sm-12 col-md-6 aboutMain">
-						<div class="about-inner">
-							<h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">About</h2>
-                            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ developer.personal_statement }}</p>
-							<div class="about-tag">
-              	<ul>
-              		<li><span>Flask</span></li>
-              		<li><span>Django</span></li>
-              		<li><span>PostgreSQL</span></li>
-              		<li><span>Gunicorn</span></li>
-              		<li><span>Nginx</span></li>
-              	</ul>
-              </div>
-              <form class="cvform" method="POST">
-								{{ viewcvform.hidden_tag() }}
-								{{ viewcvform.cvsubmit(class="btn btn-fill") }}
-							</form>
-						</div>
-					</div>
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="row about-section-separator">
+        <div class="col-sm-12 col-md-6 aboutMain">
+          <div class="about-inner">
+            <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">About</h2>
+            <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{ developer.personal_statement }}</p>
+            <div class="about-tag">
+              <ul>
+                <li><span>Flask</span></li>
+                <li><span>Django</span></li>
+                <li><span>PostgreSQL</span></li>
+                <li><span>Gunicorn</span></li>
+                <li><span>Nginx</span></li>
+              </ul>
+            </div>
+            <form class="cvform" method="POST">
+              {{ viewcvform.hidden_tag() }}
+              {{ viewcvform.cvsubmit(class="btn btn-fill") }}
+            </form>
+          </div>
+        </div>
 
-					<div class="d-none d-sm-none d-md-block col-md-1"></div>
+        <div class="d-none d-sm-none d-md-block col-md-1"></div>
 
-					<div class="d-none d-sm-none d-md-block col-md-5">
-						<div class="languages wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
-							<h3>Languages and Libraries</h3>
-							<div class="each-lang">
-								<div class="lang">
-									<div class="parcial">
-										<div class="info">
-											<div class="name">Python</div>
-											<div class="percentagem-num">Proficient</div>
-										</div>
-										<div class="progressBar">
-											<div class="percentagem" style="width: 95%;"></div>
-										</div>
-									</div>
-								</div>
-								<div class="lang">
-									<div class="parcial">
-										<div class="info">
-											<div class="name">Javascript</div>
-											<div class="percentagem-num">Competent</div>
-										</div>
-										<div class="progressBar">
-											<div class="percentagem" style="width: 75%;"></div>
-										</div>
-									</div>
-								</div>
-								<div class="lang">
-									<div class="parcial">
-										<div class="info">
-											<div class="name">jQuery</div>
-											<div class="percentagem-num">Proficient</div>
-										</div>
-										<div class="progressBar">
-											<div class="percentagem" style="width: 85%;"></div>
-										</div>
-									</div>
-								</div>
-								<div class="lang">
-									<div class="parcial">
-										<div class="info">
-											<div class="name">SQLAlchemy</div>
-											<div class="percentagem-num">Competent</div>
-										</div>
-										<div class="progressBar">
-											<div class="percentagem" style="width: 75%;"></div>
-										</div>
-									</div>
-								</div>
-								<div class="lang">
-									<div class="parcial">
-										<div class="info">
-											<div class="name">React.js</div>
-											<div class="percentagem-num">Learning</div>
-										</div>
-										<div class="progressBar">
-											<div class="percentagem" style="width: 20%;"></div>
-										</div>
-									</div>
-								</div>
-								<div class="lang">
-									<div class="parcial">
-										<div class="info">
-											<div class="name">HTML/CSS</div>
-											<div class="percentagem-num">Proficient</div>
-										</div>
-										<div class="progressBar">
-											<div class="percentagem" style="width: 90%;"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+        <div class="d-none d-sm-none d-md-block col-md-5">
+          <div class="languages wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+            <h3>Languages and Libraries</h3>
+            <div class="each-lang">
+              {% for skill in skills %}
+                <div class="lang">
+                  <div class="parcial">
+                    <div class="info">
+                      <div class="name">{{ skill.skill_name }}</div>
+                      <div class="percentagem-num">{{ skill.proficiency_level }}</div>
+                    </div>
+                    <div class="progressBar">
+                        <div class="percentagem" style="width: {{ skill.proficiency_level }}%;"></div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
-		<!-- PORTFOLIO -->
+  <!-- PORTFOLIO -->
 
-		<section id="portfolio" class="bg-light">
-			<div class="container">
-				<div class="row section-separator">
-					<div class="text-center">
-						<h2>Recent Portfolio</h2>
-					</div>
-					<div class="col-sm-12">
-						<div class="portfolio-nav col-sm-12">
-							<ul>
-								<li data-filter="*"><span>All Categories</span></li>
-								<li data-filter=".web-apps"><span>Web Applications</span></li>
-								<li data-filter=".apis"><span>APIs</span></li>
-								<li data-filter=".misc"><span>Misc</span></li>
-							</ul>
-						</div>
-						<div class="project-gallery col-sm-12">
-							<div class="row portfolioContainer">
-								<div class="grid-item col-md-4 col-sm-6 col-xs-12 web-apps">
-									<figure>
-										<img height="100%" src="{{ url_for('static', filename='images/portfolio/donate.jpeg') }}">
-										<figcaption>
-											<i class="fa fa-search"></i>
-											<h5 class="title">Donation Webpage</h5>
-											<span class="sub-title">Flask SQLAlchemy AJAX Bootstrap</span>
-											<a data-fancybox data-src="#donationsite"></a>
-										</figcaption>
-									</figure>
-								</div>
-								<div class="grid-item col-md-4 col-sm-6 col-xs-12 web-apps">
-									<figure>
-										<img height="100%" src="{{ url_for('static', filename='images/portfolio/workspace2.jpeg') }}">
-										<figcaption>
-											<i class="fa fa-search"></i>
-											<h5 class="title">Online Workspace</h5>
-											<span class="sub-title">Django PostgreSQL jQuery Bootstrap</span>
-											<a data-fancybox data-src="#workspace"></a>
-										</figcaption>
-									</figure>
-								</div>
-							</div> <!-- end row for projects div -->
-						</div> <!-- end project-gallery div -->
-					</div> <!-- end col div -->
-				</div> <!-- end section separator -->
-			</div> <!-- end container div -->
-			<div class="portfolio-modal" id="donationsite">
-				<div class="container">
-					<div class="portfolio-modal-inner row">
-						<div class="col-sm-5">
-							<h2>Donation Webpage</h2>
-							<p>Donation website with donations that can be taken with Stripe. Users can register and login to set up their own profile on the website where they can upload their profile photo, CV/resume, degree details and more.</p>
-							<p>Please feel free to make donations since it will actually charge you.</p>
-							<div class="about-tag">
-								<ul>
-									<li><span>Flask</span></li>
+  <section id="portfolio" class="bg-light">
+    <div class="container">
+      <div class="row section-separator">
+        <div class="text-center">
+          <h2>Recent Portfolio</h2>
+        </div>
+        <div class="col-sm-12">
+          <div class="portfolio-nav col-sm-12">
+            <ul>
+              <li data-filter="*"><span>All Categories</span></li>
+              <li data-filter=".web-apps"><span>Web Applications</span></li>
+              <li data-filter=".apis"><span>APIs</span></li>
+              <li data-filter=".comp-apps"><span>Computer Applications</span></li>
+            </ul>
+          </div>
+          <div class="project-gallery col-sm-12">
+            <div class="row portfolioContainer">
+              {% for webproject in webprojects %}
+                <div class="grid-item col-md-4 col-sm-6 col-xs-12 web-apps">
+                  <figure>
+                      <img height="100%" src="{{ url_for('static', filename='images/webproject/'+webproject.images+'/preview.jpeg') }}">
+                    <figcaption>
+                      <i class="fa fa-search"></i>
+                      <h5 class="title">{{ webproject.name }}</h5>
+                      <span class="sub-title">Flask SQLAlchemy AJAX Bootstrap</span>
+                      <a data-fancybox data-src="#{{ webproject.images }}"></a>
+                    </figcaption>
+                  </figure>
+                </div>
+              {% endfor %}
+              {% for softwareproject in softwareprojects %}
+                <div class="grid-item col-md-4 col-sm-6 col-xs-12 comp-apps">
+                  <figure>
+                      <img height="100%" src="{{ url_for('static', filename='images/softwareproject/'+softwareproject.images+'/preview.jpeg') }}">
+                    <figcaption>
+                      <i class="fa fa-search"></i>
+                      <h5 class="title">{{ softwareproject.name }}</h5>
+                      <span class="sub-title">Flask SQLAlchemy AJAX Bootstrap</span>
+                      <a data-fancybox data-src="#{{ softwareproject.images }}"></a>
+                    </figcaption>
+                  </figure>
+                </div>
+              {% endfor %}
+            </div> <!-- end row for projects div -->
+          </div> <!-- end project-gallery div -->
+        </div> <!-- end col div -->
+      </div> <!-- end section separator -->
+    </div> <!-- end container div -->
+    {% for webproject in webprojects %}
+      <div class="portfolio-modal" id="{{ webproject.images }}">
+        <div class="container">
+          <div class="portfolio-modal-inner row">
+            <div class="col-sm-5">
+              <h2>{{ webproject.name }}</h2>
+              <p>{{ webproject.description }}</p>
+              <div class="about-tag">
+                <ul>
+                  <li><span>Flask</span></li>
                   <li><span>AJAX</span></li>
                   <li><span>jQuery</span></li>
                   <li><span>SQLAlchemy</span></li>
@@ -211,229 +162,202 @@
                   <li><span>Stripe</span></li>
                   <li><span>Bootstrap</span></li>
                   <li><span>HTML/CSS</span></li>
-	              </ul>
-							</div>
-							<a target="_blank" href="https://www.donate2grads.com/" class="btn btn-fill btn-secondary">Go to Website</a>
-							<a target="_blank" href="https://github.com/kunheeha/DonationSite" class="btn btn-outline-secondary">View source code</a>
-						</div>
-						<div class="col-sm-7">
-							<div class="portfolio-modal-img">
-								<img width="100%" src="{{ url_for('static', filename='images/portfolio/donatePhone.jpeg') }}">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="portfolio-modal" id="workspace">
-				<div class="container">
-					<div class="portfolio-modal-inner row">
-						<div class="col-sm-5">
-							<h2>Online Workspace</h2>
-							<p>Web application to store and organise files, tasks and notes for different projects in their relevant web-based 'workspaces' accordingly. Users can grant access for other users to the workspaces they create, allowing for a viable solution for handling group projects with an efficient way of sharing relevant files, notes and tasks, all organised into notebooks and folders in each of the workspaces.</p>
-							<p>Limit of one workspace and three upload files per user with the option of buying more as required, achieved thorugh Stripe APIs and webhooks.</p>
-							<div class="about-tag">
-								<ul>
-									<li><span>Django</span></li>
-                  <li><span>PostgreSQL</span></li>
-                  <li><span>jQuery</span></li>
-                  <li><span>Stripe</span></li>
-                  <li><span>Bootstrap</span></li>
-                  <li><span>HTML/CSS</span></li>
-	              </ul>
-							</div>
-							<a target="_blank" href="https://www.onlineworkspace.org" class="btn btn-fill btn-secondary">Go to Website</a>
-							<a target="_blank" href="https://github.com/kunheeha/onlineworkspace" class="btn btn-outline-secondary">View source code</a>
-						</div>
-						<div class="col-sm-7">
-							<div class="portfolio-modal-img">
-								<img width="100%" src="{{ url_for('static', filename='images/portfolio/WorkspaceMobile.jpeg') }}">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Skills -->
-        <section class="skills">
-            <div class="container">
-                <div class="row section-separator">
-                    <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-                        <h2>Skills</h2>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="skills-item shadow-1 white-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
-                            <i class="fa fa-code iron-color"></i>
-                            <h3>Web Development</h3>
-                            <div class="about-tag">
-							              	<ul>
-							              		<li><span>Flask</span></li>
-							              		<li><span>Django</span></li>
-							              		<li><span>jQuery</span></li>
-							              		<li><span>AJAX</span></li>
-							              		<li><span>Bootstrap</span></li>
-							              	</ul>
-							              </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="skills-item shadow-1 white-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
-                            <i class="fa fa-object-ungroup sky-color"></i>
-                            <h3>Data Management</h3>
-                            <div class="about-tag">
-							              	<ul>
-							              		<li><span>PostgreSQL</span></li>
-							              		<li><span>SQLAlchemy</span></li>
-							              		<li><span>Alembic</span></li>
-							              		<li><span>R</span></li>
-							              	</ul>
-							              </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="skills-item shadow-1 white-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
-                            <i class="fa fa-bullseye purple-color"></i>
-                            <h3>Deployment and Workflow</h3>
-                            <div class="about-tag">
-							              	<ul>
-							              		<li><span>Git</span></li>
-							              		<li><span>Bash</span></li>
-							              		<li><span>Nginx</span></li>
-							              		<li><span>Gunicorn</span></li>
-							              		<li><span>Heroku</span></li>
-							              	</ul>
-							              </div>
-                        </div>
-                    </div>
-                </div>
+                </ul>
+              </div>
+              <a target="_blank" href="{{ webproject.link }}" class="btn btn-fill btn-secondary">Go to Website</a>
+              <a target="_blank" href="{{ webproject.source_code }}" class="btn btn-outline-secondary">View source code</a>
             </div>
-        </section>
+            <div class="col-sm-7">
+              <div class="portfolio-modal-img">
+                <img width="100%" src="{{ url_for('static', filename='images/webproject/'+webproject.images+'/modalimg.jpeg') }}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+
+  <!-- Skills -->
+  <section class="skills">
+      <div class="container">
+          <div class="row section-separator">
+              <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                <h2>Skills</h2>
+              </div>
+              <div class="col-sm-4">
+                <div class="skills-item shadow-1 white-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.5s">
+                  <i class="fa fa-code iron-color"></i>
+                  <h3>Web Development</h3>
+                  <div class="about-tag">
+                    <ul>
+                      <li><span>Flask</span></li>
+                      <li><span>Django</span></li>
+                      <li><span>jQuery</span></li>
+                      <li><span>AJAX</span></li>
+                      <li><span>Bootstrap</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="skills-item shadow-1 white-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
+                  <i class="fa fa-object-ungroup sky-color"></i>
+                  <h3>Data Management</h3>
+                  <div class="about-tag">
+                    <ul>
+                      <li><span>PostgreSQL</span></li>
+                      <li><span>SQLAlchemy</span></li>
+                      <li><span>Alembic</span></li>
+                      <li><span>R</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="skills-item shadow-1 white-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">
+                  <i class="fa fa-bullseye purple-color"></i>
+                  <h3>Deployment and Workflow</h3>
+                  <div class="about-tag">
+                    <ul>
+                      <li><span>Git</span></li>
+                      <li><span>Bash</span></li>
+                      <li><span>Nginx</span></li>
+                      <li><span>Gunicorn</span></li>
+                      <li><span>Heroku</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
 
 
-		<!-- EXTRA -->
-		<section class="image-bg extra-img">
-			<div class="container">
-				<div class="row section-separator">
-					<div class="extrapart col-sm-12 col-md-6">
-						<h3 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Interested?</h3>
-						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">Always open to discussing work or collaboration opportunities. <br>Please send me a message using the contact form below or get in touch via email or phone.</p>
-						<form class="cvform" method="POST">
-							{{ viewcvform.hidden_tag() }}
-							{{ viewcvform.cvsubmit(class="btn btn-fill") }}
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
+  <!-- EXTRA -->
+  <section class="image-bg extra-img">
+    <div class="container">
+      <div class="row section-separator">
+        <div class="extrapart col-sm-12 col-md-6">
+          <h3 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Interested?</h3>
+          <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">Always open to discussing work or collaboration opportunities. <br>Please send me a message using the contact form below or get in touch via email or phone.</p>
+          <form class="cvform" method="POST">
+            {{ viewcvform.hidden_tag() }}
+            {{ viewcvform.cvsubmit(class="btn btn-fill") }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 
 
-		<!-- CONTACT -->
+  <!-- CONTACT -->
 
-		<section id="contact" class="contact-section bg-light">
-			<div class="container">
-				<div class="row section-separator">
-					<div class="col-sm-12 text-center wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-						<h2>Contact Me</h2>
-					</div>
-					<div class="map-image image-bg col-sm-12">
-						<div class="container mt-30">
-							<div class="row">
-								<div class="col-sm-12 col-md-6 contact-info">
-									<div class="col-sm-12 xs-no-padding">
-										<div class="contact-info-item white-bg shadow-1 media wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-											<div class="each-icon">
-												<i class="fa fa-location-arrow"></i>
-											</div>
-											<div class="each-info media-body">
-												<h4>Address</h4>
-												<address>
-													Birmingham, UK<br>
-													<a href="{{ url_for('address') }}">To request full address click here</a>
-												</address>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-12 xs-no-padding">
-										<div class="contact-info-item white-bg shadow-1 media wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
-											<div class="each-icon">
-												<i class="fa fa-envelope-o"></i>
-											</div>
-											<div class="each-info media-body">
-												<h4>Email</h4>
-												<a class="emailLink">kunheeha@gmail.com</a>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-12 xs-no-padding">
-										<div class="contact-info-item white-bg shadow-1 media wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
-											<div class="each-icon">
-												<i class="fa fa-phone"></i>
-											</div>
-											<div class="each-info media-body">
-												<h4>Phone</h4>
-												<a href="tel:+447407316920">+44 7947513711</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-6 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-									<div class="card card-contact">
-										<div class="card-body">
-											<div class="formMessages"></div>
-											<form class="contact-form" method="POST" action="">
-												<div>
-													<div class="form-label-group">
-														<input id="inputFname" type="text" name="fname" class="form-control" placeholder="First Name" required>
-														<label for="inputFname">First Name</label>
-													</div>
-													<div class="form-label-group">
-														<input id="inputLname" type="text" name="lname" class="form-control" placeholder="Last Name" required>
-														<label for="inputLname">Last Name</label>
-													</div>
-													<div class="form-label-group">
-														<input id="inputEmail" type="email" name="email" class="form-control" placeholder="Email" required>
-														<label for="inputEmail">Email</label>
-													</div>
-													<div class="form-label-group">
-														<textarea id="inputMessage" class="form-control" name="message" placeholder="Message" rows="6" required></textarea>
-														<label for="inputMessage">Message</label>
-													</div>
-													<hr>
-													<button type="submit" class="btn btn-block btn-dark">Send Message</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+  <section id="contact" class="contact-section bg-light">
+    <div class="container">
+      <div class="row section-separator">
+        <div class="col-sm-12 text-center wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+          <h2>Contact Me</h2>
+        </div>
+        <div class="map-image image-bg col-sm-12">
+          <div class="container mt-30">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 contact-info">
+                <div class="col-sm-12 xs-no-padding">
+                  <div class="contact-info-item white-bg shadow-1 media wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                    <div class="each-icon">
+                      <i class="fa fa-location-arrow"></i>
+                    </div>
+                    <div class="each-info media-body">
+                      <h4>Address</h4>
+                      <address>
+                        Birmingham, UK<br>
+                        <a href="{{ url_for('address') }}">To request full address click here</a>
+                      </address>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 xs-no-padding">
+                  <div class="contact-info-item white-bg shadow-1 media wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">
+                    <div class="each-icon">
+                      <i class="fa fa-envelope-o"></i>
+                    </div>
+                    <div class="each-info media-body">
+                      <h4>Email</h4>
+                      <a class="emailLink">kunheeha@gmail.com</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 xs-no-padding">
+                  <div class="contact-info-item white-bg shadow-1 media wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
+                    <div class="each-icon">
+                      <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="each-info media-body">
+                      <h4>Phone</h4>
+                      <a href="tel:+447407316920">+44 7947513711</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+                <div class="card card-contact">
+                  <div class="card-body">
+                    <div class="formMessages"></div>
+                    <form class="contact-form" method="POST" action="">
+                      <div>
+                        <div class="form-label-group">
+                          <input id="inputFname" type="text" name="fname" class="form-control" placeholder="First Name" required>
+                          <label for="inputFname">First Name</label>
+                        </div>
+                        <div class="form-label-group">
+                          <input id="inputLname" type="text" name="lname" class="form-control" placeholder="Last Name" required>
+                          <label for="inputLname">Last Name</label>
+                        </div>
+                        <div class="form-label-group">
+                          <input id="inputEmail" type="email" name="email" class="form-control" placeholder="Email" required>
+                          <label for="inputEmail">Email</label>
+                        </div>
+                        <div class="form-label-group">
+                          <textarea id="inputMessage" class="form-control" name="message" placeholder="Message" rows="6" required></textarea>
+                          <label for="inputMessage">Message</label>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-block btn-dark">Send Message</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-		<!-- Footer-->
-		<footer class="footer py-4">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-4 text-lg-left">
-						© Kunhee Ha
-					</div>
-					<div class="col-lg-4 my-3 my-lg-0">
-						<ul class="social-icon">
-							<li><a target="_blank" href="https://www.linkedin.com/in/kunheeha/"><i class="fa fa-linkedin-square"></i></a></li>
-							<li><a target="_blank" href="https://github.com/kunheeha/"><i class="fa fa-github"></i></a></li>
-							<li><a target="_blank" href="https://stackoverflow.com/users/14336257/kunheeha"><i class="fa fa-stack-overflow"></i></a></li>
-						</ul>
-					</div>
-					<div class="col-lg-4 text-lg-right">
-						<div class="adminlink"><a href="{{ url_for('login') }}">Admin</a></div>
-					</div>
-				</div>
-			</div>
-		</footer>
+  <!-- Footer-->
+  <footer class="footer py-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-4 text-lg-left">
+          © Kunhee Ha
+        </div>
+        <div class="col-lg-4 my-3 my-lg-0">
+          <ul class="social-icon">
+            <li><a target="_blank" href="https://www.linkedin.com/in/kunheeha/"><i class="fa fa-linkedin-square"></i></a></li>
+            <li><a target="_blank" href="https://github.com/kunheeha/"><i class="fa fa-github"></i></a></li>
+            <li><a target="_blank" href="https://stackoverflow.com/users/14336257/kunheeha"><i class="fa fa-stack-overflow"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 text-lg-right">
+          <div class="adminlink"><a href="{{ url_for('login') }}">Admin</a></div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
 

@@ -2,87 +2,87 @@
 
 {% block head %}
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/addressrequest.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/addressrequest.css') }}">
 
 {% endblock %}
 
 {% block content %}
 
 
-		<!-- Navigation-->
-		<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-			<div class="container">
-				<a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="" /></a>
-				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav text-uppercase ml-auto">
-						<li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Back</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<!-- HOME -->
-		<header class="home-header">
-			<div class="bg-image">
-				<div class="container">
-					<div class="row row-padding">
-						<div class="col-lg-10 col-xl-9 mx-auto">
-							<div class="card card-signin flex-row my-5">
-								<div class="card-body">
-									<h5 class="card-title text-center">Request Address</h5>
-									<div>
-										{% with messages = get_flashed_messages(with_categories=true) %}
-											{% if messages %}
-												{% for category, message in messages %}
-													<div class="alert alert-{{ category }}">
-														{{ message }}
-													</div>
-												{% endfor %}
-											{% endif %}
-										{% endwith %}
-									</div>
-									<form class="form-signin" method="POST" action="">
-										{{ form.hidden_tag() }}
-										<div>
-											<div class="form-label-group">
-												{% if form.email.errors %}
-													{{ form.email(id="inputEmail", class="form-control is-invalid", placeholder="Email") }}
-													<div class="invalid-feedback">
-														{% for error in form.email.errors %}
-															<span>{{ error }}</span>
-														{% endfor %}
-													</div>
-												{% else %}
-												{{ form.email(id="inputEmail", class="form-control", placeholder="Email") }}
-												<label for="inputEmail">Email</label>
-												{% endif %}
-											</div>
-											
-											<div class="form-label-group">
-												{% if form.reason.errors %}
-													{{ form.reason(id="inputReason", class="form-control is-invalid", placeholder="Reason for needing address") }}
-													<div class="invalid-feedback">
-														{% for error in form.reason.errors %}
-															<span>{{ error }}</span>
-														{% endfor %}
-													</div>
-												{% else %}
-												{{ form.reason(id="inputReason", class="form-control", placeholder="Reason for needing address") }}
-												<label for="inputReason">Reason for needing address</label>
-												{% endif %}
-											</div>
-											<hr>
-											{{ form.submit(class="btn btn-lg btn-dark btn-block text-uppercase") }}
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="" /></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Back</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- HOME -->
+    <header class="home-header">
+      <div class="bg-image">
+        <div class="container">
+          <div class="row row-padding">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+              <div class="card card-signin flex-row my-5">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Request Address</h5>
+                  <div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        {% for category, message in messages %}
+                          <div class="alert alert-{{ category }}">
+                            {{ message }}
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+                  </div>
+                  <form class="form-signin" method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div>
+                      <div class="form-label-group">
+                        {% if form.email.errors %}
+                          {{ form.email(id="inputEmail", class="form-control is-invalid", placeholder="Email") }}
+                          <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                              <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% else %}
+                        {{ form.email(id="inputEmail", class="form-control", placeholder="Email") }}
+                        <label for="inputEmail">Email</label>
+                        {% endif %}
+                      </div>
+                      
+                      <div class="form-label-group">
+                        {% if form.reason.errors %}
+                          {{ form.reason(id="inputReason", class="form-control is-invalid", placeholder="Reason for needing address") }}
+                          <div class="invalid-feedback">
+                            {% for error in form.reason.errors %}
+                              <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% else %}
+                        {{ form.reason(id="inputReason", class="form-control", placeholder="Reason for needing address") }}
+                        <label for="inputReason">Reason for needing address</label>
+                        {% endif %}
+                      </div>
+                      <hr>
+                      {{ form.submit(class="btn btn-lg btn-dark btn-block text-uppercase") }}
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
 {% endblock %}
