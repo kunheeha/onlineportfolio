@@ -47,6 +47,24 @@ class SoftwareProjectSkills(db.Model):
     software_project_id = db.Column(db.Integer(), db.ForeignKey('software_project.id', ondelete='CASCADE'))
     p_skill_id = db.Column(db.Integer(), db.ForeignKey('p_skill.id', ondelete='CASCADE'))
 
+class APIProjectSkills(db.Model):
+    __tablename__ = 'api_project_skills'
+    id = db.Column(db.Integer(), primary_key=True)
+    api_project_id = db.Column(db.Integer(), db.ForeignKey('api_project.id', ondelete='CASCADE'))
+    p_skill_id = db.Column(db.Integer(), db.ForeignKey('p_skill.id', ondelete='CASCADE'))
+
+class APIProject(db.Model):
+    __tablename__ = 'api_project'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    source_code = db.Column(db.String(50), nullable=False)
+    link = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
+    user_guide = db.Column(db.String(20), nullable=True)
+    upcoming_functionality = db.Column(db.Text(), nullable=True)
+    images = db.Column(db.String(50), nullable=False)
+    skills = db.relationship('PSkill', secondary='api_project_skills')
+
 class SoftwareProject(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(30), nullable=False)

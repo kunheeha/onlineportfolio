@@ -144,6 +144,19 @@
                   </figure>
                 </div>
               {% endfor %}
+              {% for apiproject in apiprojects %}
+                <div class="grid-item col-md-4 col-sm-6 col-xs-12 apis">
+                  <figure>
+                      <img height="100%" src="{{ url_for('static', filename='images/apiproject/'+apiproject.images+'/preview.jpeg') }}">
+                    <figcaption>
+                      <i class="fa fa-search"></i>
+                      <h5 class="title">{{ apiproject.name }}</h5>
+                      <span class="sub-title">Flask SQLAlchemy AJAX Bootstrap</span>
+                      <a data-fancybox data-src="#{{ apiproject.images }}"></a>
+                    </figcaption>
+                  </figure>
+                </div>
+              {% endfor %}
             </div> <!-- end row for projects div -->
           </div> <!-- end project-gallery div -->
         </div> <!-- end col div -->
@@ -195,6 +208,32 @@
             <div class="col-sm-7">
               <div class="portfolio-modal-img">
                 <img width="100%" src="{{ url_for('static', filename='images/softwareproject/'+softwareproject.images+'/modalimg.jpeg') }}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% for apiproject in apiprojects %}
+      <div class="portfolio-modal" id="{{ apiproject.images }}">
+        <div class="container">
+          <div class="portfolio-modal-inner row">
+            <div class="col-sm-5">
+              <h2>{{ apiproject.name }}</h2>
+              <p>{{ apiproject.description }}</p>
+              <div class="about-tag">
+                <ul>
+                  {% for skill in apiproject.skills %}
+                    <li><span>{{ skill.name }}</span></li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <a target="_blank" href="{{ apiproject.link }}" class="btn btn-fill btn-secondary">Go to Website</a>
+              <a target="_blank" href="{{ apiproject.source_code }}" class="btn btn-outline-secondary">View source code</a>
+            </div>
+            <div class="col-sm-7">
+              <div class="portfolio-modal-img">
+                <img width="100%" src="{{ url_for('static', filename='images/apiproject/'+apiproject.images+'/modalimg.jpeg') }}">
               </div>
             </div>
           </div>

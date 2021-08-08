@@ -5,7 +5,7 @@ from flask import render_template, request, url_for, flash, redirect, send_from_
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from onlineportfolio import app, db, bcrypt, mail
-from onlineportfolio.models import Person, User, Skill, SoftwareProject, WebProject
+from onlineportfolio.models import Person, User, Skill, SoftwareProject, WebProject, APIProject
 from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm, RequestAddressForm
 
 
@@ -17,6 +17,7 @@ def index():
     skills = Skill.query.all()
     softwareprojects = SoftwareProject.query.all()
     webprojects = WebProject.query.all()
+    apiprojects = APIProject.query.all()
 
 
     if viewcvform.cvsubmit.data and viewcvform.validate():
@@ -24,7 +25,7 @@ def index():
         mydirectory = os.path.join(app.root_path, 'static/cv')
         return send_from_directory(directory=mydirectory, filename=cv)
 
-    return render_template("index.html", viewcvform=viewcvform, developer=developer, profile_photo=profile_photo, skills=skills, softwareprojects=softwareprojects, webprojects=webprojects)
+    return render_template("index.html", viewcvform=viewcvform, developer=developer, profile_photo=profile_photo, skills=skills, softwareprojects=softwareprojects, webprojects=webprojects, apiprojects=apiprojects)
 
 
 @app.route('/contact', methods=['POST', 'GET'])
