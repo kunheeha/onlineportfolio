@@ -1,0 +1,16 @@
+.inactiveNote {
+	display: none !important;
+}
+
+.allNotes {
+	padding: 10px 20px;
+}
+
+.align-items-center p {
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.notes h3 {
+	margin-bottom: 20px;
+}

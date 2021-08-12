@@ -146,7 +146,11 @@
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ softwareproject.name }}</h5>
-                      <span class="sub-title">Flask SQLAlchemy AJAX Bootstrap</span>
+                      <span class="sub-title">
+                        {% for skill in webproject.skills %}
+                          {{ skill.name }}
+                        {% endfor %}
+                      </span>
                       <a data-fancybox data-src="#{{ softwareproject.images }}"></a>
                     </figcaption>
                   </figure>
@@ -159,7 +163,11 @@
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ apiproject.name }}</h5>
-                      <span class="sub-title">Flask SQLAlchemy AJAX Bootstrap</span>
+                      <span class="sub-title">
+                        {% for skill in webproject.skills %}
+                          {{ skill.name }}
+                        {% endfor %}
+                      </span>
                       <a data-fancybox data-src="#{{ apiproject.images }}"></a>
                     </figcaption>
                   </figure>
@@ -170,13 +178,20 @@
         </div> <!-- end col div -->
       </div> <!-- end section separator -->
     </div> <!-- end container div -->
+
+    <!-- WebProject Modal -->
     {% for webproject in webprojects %}
       <div class="portfolio-modal" id="{{ webproject.images }}">
         <div class="container">
           <div class="portfolio-modal-inner row">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
               <h2>{{ webproject.name }}</h2>
+              <hr>
               <p>{{ webproject.description }}</p>
+              <hr>
+              <h5> Upcoming Functionality</h5>
+              <a href="{{ url_for('webprojectinfo', project_id=webproject.id) }}">More Details</a>
+              <hr>
               <div class="about-tag">
                 <ul>
                   {% for skill in webproject.skills %}
@@ -187,7 +202,7 @@
               <a target="_blank" href="{{ webproject.link }}" class="btn btn-fill btn-secondary">Go to Website</a>
               <a target="_blank" href="{{ webproject.source_code }}" class="btn btn-outline-secondary">View source code</a>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
               <div class="portfolio-modal-img">
                 <img width="100%" src="{{ url_for('static', filename='images/webproject/'+webproject.images+'/modalimg.jpeg') }}">
               </div>
@@ -196,13 +211,22 @@
         </div>
       </div>
     {% endfor %}
+
+    <!-- SoftwareProject Modal -->
     {% for softwareproject in softwareprojects %}
       <div class="portfolio-modal" id="{{ softwareproject.images }}">
         <div class="container">
           <div class="portfolio-modal-inner row">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
               <h2>{{ softwareproject.name }}</h2>
+              <hr>
               <p>{{ softwareproject.description }}</p>
+              <hr>
+              <h5>Upcoming Updates</h5>
+              <hr>
+              <p>{{ softwareproject.upcoming_functionality }}
+              <hr>
+              <a href="{{ url_for('softwareprojectinfo', project_id=softwareproject.id) }}">Installation and User Guide</a>
               <div class="about-tag">
                 <ul>
                   {% for skill in softwareproject.skills %}
@@ -210,10 +234,10 @@
                   {% endfor %}
                 </ul>
               </div>
-              <a target="_blank" href="{{ softwareproject.link }}" class="btn btn-fill btn-secondary">Go to Website</a>
+              <a target="_blank" href="{{ softwareproject.link }}" class="btn btn-fill btn-secondary">Download</a>
               <a target="_blank" href="{{ softwareproject.source_code }}" class="btn btn-outline-secondary">View source code</a>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
               <div class="portfolio-modal-img">
                 <img width="100%" src="{{ url_for('static', filename='images/softwareproject/'+softwareproject.images+'/modalimg.jpeg') }}">
               </div>
@@ -222,13 +246,22 @@
         </div>
       </div>
     {% endfor %}
+
+    <!-- APIProject Modal -->
     {% for apiproject in apiprojects %}
       <div class="portfolio-modal" id="{{ apiproject.images }}">
         <div class="container">
           <div class="portfolio-modal-inner row">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
               <h2>{{ apiproject.name }}</h2>
+              <hr>
               <p>{{ apiproject.description }}</p>
+              <hr>
+              <h5>Upcoming Functionality</h5>
+              <hr>
+              <p>{{ apiproject.upcoming_functionality }}</p>
+              <a href="{{ url_for('apiprojectinfo', project_id=apiproject.id) }}">More Details</a>
+              <hr>
               <div class="about-tag">
                 <ul>
                   {% for skill in apiproject.skills %}
@@ -236,10 +269,10 @@
                   {% endfor %}
                 </ul>
               </div>
-              <a target="_blank" href="{{ apiproject.link }}" class="btn btn-fill btn-secondary">Go to Website</a>
+              <a target="_blank" href="{{ apiproject.link }}" class="btn btn-fill btn-secondary">User Guide</a>
               <a target="_blank" href="{{ apiproject.source_code }}" class="btn btn-outline-secondary">View source code</a>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
               <div class="portfolio-modal-img">
                 <img width="100%" src="{{ url_for('static', filename='images/apiproject/'+apiproject.images+'/modalimg.jpeg') }}">
               </div>

@@ -6,7 +6,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from onlineportfolio import app, db, bcrypt, mail
 from onlineportfolio.models import Person, User, Skill, SoftwareProject, WebProject, APIProject
-from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm, RequestAddressForm, SkillForm
+from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm, RequestAddressForm, SkillForm, APIProjectForm, SoftwareProjectForm, WebProjectForm
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -55,15 +55,18 @@ def contact():
 
 @app.route('/APIProject/<int:project_id>/info')
 def apiprojectinfo(project_id):
-    pass
+    project = APIProject.query.get(project_id)
+    return render_template('web_info.html', project=project)
 
 @app.route('/SoftwareProject/<int:project_id>/info')
 def softwareprojectinfo(project_id):
-    pass
+    project = SoftwareProject.query.get(project_id)
+    return render_template('software_info.html', project=project)
 
 @app.route('/WebProject/<int:project_id>/info')
 def webprojectinfo(project_id):
-    pass
+    project = WebProject.query.get(project_id)
+    return render_template('web_info.html', project=project)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -184,29 +187,126 @@ def skilldelete(skill_id):
     db.session.commit()
     return redirect(url_for('admin'))
 
-@app.route('/APIProject/add')
+@app.route('/APIProject/add', methods=['GET', 'POST'])
+@login_required
 def apiprojectnew():
-    pass
+    form = APIProjectForm()
+    if form.validate_on_submit():
+        project = APIProject(name=form.name.data, source_code=form.source_code.data, link=form.link.data, description=form.description.data)
+        if form.user_guide.data:
+            project.user_guide = form.user_guide.data
+        if form.upcoming_functionality.data:
+            project.upcoming_functionality = form.upcoming_functionality.data
+        db.session.add(project)
+        db.session.commit()
+        return redirect(url_for('admin'))
+    return render_template('web_project_new.html', form=form)
 
-@app.route('/SoftwareProject/add')
+@app.route('/SoftwareProject/add', methods=['GET', 'POST'])
+@login_required
 def softwareprojectnew():
-    pass
+    form = SoftwareProjectForm()
+    if form.validate_on_submit():
+        project = SoftwareProject(name=form.name.data, source_code=form.source_code.data, description=form.description.data)
+        if form.windows_file.data:
+            project.windows_file = form.windows_file.data
+        if form.macos_file.data:
+            project.macos_file = form.macos_file.data
+        if form.linux_file.data:
+            project.linux_file = form.linux_file.data
+        if form.installation_guide.data:
+            project.installation_guide = form.installation_guide.data
+        if form.user_guide.data:
+            project.user_guide = form.user_guide.data
+        if form.upcoming_functionality.data:
+            project.upcoming_functionality = form.upcoming_functionality.data
+        db.session.add(project)
+        db.session.commit()
+        return redirect(url_for('admin'))
+    return render_template('software_project_new.html', form=form)
 
-@app.route('/WebProject/add')
+@app.route('/WebProject/add', methods=['GET', 'POST'])
+@login_required
 def webprojectnew():
-    pass
+    form = WebProjectForm()
+    if form.validate_on_submit():
+        project = WebProject(name=form.name.data, source_code=form.source_code.data, link=form.link.data, description=form.description.data)
+        if form.user_guide.data:
+            project.user_guide = form.user_guide.data
+        if form.upcoming_functionality.data:
+            project.upcoming_functionality = form.upcoming_functionality.data
+        db.session.add(project)
+        db.session.commit()
+        return redirect(url_for('admin'))
+    return render_template('web_project_new.html', form=form)
 
 @app.route('/APIProject/<int:project_id>/edit')
+@login_required
 def apiprojectedit(project_id):
-    pass
+    project = APIProject.query.get_or_404(project_id)
+    form = APIProjectForm()
+    if form.validate_on_submit():
+        project.name = form.name.data
+        project.source_code = form.source_code.data
+        project.link = form.link.data
+        project.description = form.description.data
+        if form.user_guide.data:
+            project.user_guide = form.user_guide.data
+        if form.upcoming_functionality.data:
+            project.upcoming_functionality = form.upcoming_functionality.data
+        db.session.commit()
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        form.name.data = project.name
+        form.source_code.data = project.source_code
+        form.link.data = project.link
+        form.description.data = project.description
+        form.upcoming_functionality.data = project.upcoming_functionality
+    return render_template('web_project_new.html', form=form)
 
 @app.route('/SoftwareProject/<int:project_id>/edit')
+@login_required
 def softwareprojectedit(project_id):
-    pass
+    project = SoftwareProject.query.get_or_404(project_id)
+    form = SoftwareProjectForm()
+    if form.validate_on_submit():
+        project.name = form.name.data
+        project.source_code = form.source_code.data
+        project.description = form.description.data
+        if form.upcoming_functionality.data:
+            project.upcoming_functionality = form.upcoming_functionality.data
+        db.session.commit()
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        form.name.data = project.name
+        form.source_code.data = project.source_code
+        form.description.data = project.description
+        form.upcoming_functionality.data = project.upcoming_functionality
+    return render_template('software_project_new.html', form=form)
 
 @app.route('/WebProject/<int:project_id>/edit')
+@login_required
 def webprojectedit(project_id):
-    pass
+    project = WebProject.query.get_or_404(project_id)
+    form = WebProjectForm()
+    if form.validate_on_submit():
+        project.name = form.name.data
+        project.source_code = form.source_code.data
+        project.link = form.link.data
+        project.description = form.description.data
+        if form.user_guide.data:
+            project.user_guide = form.user_guide.data
+        if form.upcoming_functionality.data:
+            project.upcoming_functionality = form.upcoming_functionality.data
+        db.session.commit()
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        form.name.data = project.name
+        form.source_code.data = project.source_code
+        form.link.data = project.link
+        form.description.data = project.description
+        form.upcoming_functionality.data = project.upcoming_functionality
+    return render_template('web_project_new.html', form=form)
 
 @app.route('/logout')
 def logout():
