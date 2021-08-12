@@ -6,7 +6,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from onlineportfolio import app, db, bcrypt, mail
 from onlineportfolio.models import Person, User, Skill, SoftwareProject, WebProject, APIProject
-from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm, RequestAddressForm
+from onlineportfolio.forms import LoginForm, AddCVForm, ViewCVForm, AboutForm, AddImageForm, RequestAddressForm, SkillForm
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -53,28 +53,25 @@ def contact():
         except:
             return jsonify(status=False)
 
+@app.route('/APIProject/<int:project_id>/info')
+def apiprojectinfo(project_id):
+    pass
 
-@app.route('/address', methods=['POST', 'GET'])
-def address():
-    form = RequestAddressForm()
-    if form.validate_on_submit():
-        visitoremail = form.email.data
-        reason = form.reason.data
-        toreceive = Message(subject='Address Request', sender=visitoremail,
-                            body=f'Sender: {visitoremail}. Reason : {reason}.', recipients=["kunheeha@gmail.com"])
-        mail.send(toreceive)
-        flash('Your request has been received. Please await an email response', 'success')
+@app.route('/SoftwareProject/<int:project_id>/info')
+def softwareprojectinfo(project_id):
+    pass
 
-    return render_template("foraddress.html", form=form)
-
+@app.route('/WebProject/<int:project_id>/info')
+def webprojectinfo(project_id):
+    pass
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        me = Person.query.filter_by(email=form.email.data).first()
-        if me and bcrypt.check_password_hash(me.password, form.password.data):
-            login_user(me)
+        developer = User.query.first()
+        if bcrypt.check_password_hash(developer.password, form.password.data):
+            login_user(developer)
             return redirect(url_for('admin'))
     return render_template("login.html", form=form)
 
@@ -88,14 +85,25 @@ def save_cv(form_cv):
 
     return cv_fn
 
+def save_profile_photo(form_profile_photo):
+    name = 'ProfilePhoto'
+    _, f_ext = os.path.splitext(form_profile_photo.filename)
+    profile_photo_fn = name + f_ext
+    profile_photo_path = os.path.join(app.root_path, 'static/images', profile_photo_fn)
+    form_profile_photo.save(profile_photo_path)
+
+    return cv_fn
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
+    skills = Skill.query.all()
+
     cvform = AddCVForm()
     aboutform = AboutForm()
     viewcvform = ViewCVForm()
     imageform = AddImageForm()
+    skillform = SkillForm()
 
     if viewcvform.cvsubmit.data and viewcvform.validate():
         me = Person.query.first()
@@ -120,6 +128,23 @@ def admin():
                 db.session.commit()
                 flash('Your CV has been updated', 'success')
 
+    if imageform.validate_on_submit():
+        if not current_user.profile_photo:
+            if imageform.image_file.data:
+                profilephoto = save_profile_photo(imageform.image_file.data)
+                current_user.profile_photo = profilephoto
+                db.session.commit()
+                flash('Your Profile Photo has been uploaded', 'success')
+        elif current_user.profile_photo:
+            if imageform.image_file.data:
+                profilephotofilename = current_user.profile_photo
+                path = os.path.join(app.root_path, 'static/images', profilephotofilename)
+                os.remove(path)
+                profilephoto = save_profile_photo(imageform.image_file.data)
+                current_user.profile_photo = profilephoto
+                db.session.commit()
+                flash('Your Profile Photo has been updated', 'success')
+
     if aboutform.validate_on_submit():
         current_user.personal_statement = aboutform.personal_statement.data
         db.session.commit()
@@ -128,8 +153,60 @@ def admin():
         if current_user.personal_statement:
             aboutform.personal_statement.data = current_user.personal_statement
 
-    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform)
+    if skillform.validate_on_submit():
+        newskill = Skill(skill_name=skillform.skill_name.data, proficiency_level=skillform.proficiency_level.data)
+        db.session.add(newskill)
+        db.session.commit()
+        flash('New Skill Added', 'success')
 
+    return render_template("admin_test.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform, skills=skills, skillform=skillform)
+
+@app.route('/skill/<int:skill_id>/edit', methods=['GET', 'POST'])
+@login_required
+def skilledit(skill_id):
+    skill = Skill.query.get_or_404(skill_id)
+    skillform = SkillForm()
+    if skillform.validate_on_submit():
+        skill.skill_name = skillform.skill_name.data
+        skill.proficiency_level = skillform.proficiency_level.data
+        db.session.commit()
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        skillform.skill_name.data = skill.skill_name
+        skillform.proficiency_level.data = skill.proficiency_level
+    return render_template("skilledit.html", skillform=skillform)
+    
+@app.route('/skill/<int:skill_id>/delete', methods=['POST'])
+@login_required
+def skilldelete(skill_id):
+    skill = Skill.query.get_or_404(skill_id)
+    db.session.delete(skill)
+    db.session.commit()
+    return redirect(url_for('admin'))
+
+@app.route('/APIProject/add')
+def apiprojectnew():
+    pass
+
+@app.route('/SoftwareProject/add')
+def softwareprojectnew():
+    pass
+
+@app.route('/WebProject/add')
+def webprojectnew():
+    pass
+
+@app.route('/APIProject/<int:project_id>/edit')
+def apiprojectedit(project_id):
+    pass
+
+@app.route('/SoftwareProject/<int:project_id>/edit')
+def softwareprojectedit(project_id):
+    pass
+
+@app.route('/WebProject/<int:project_id>/edit')
+def webprojectedit(project_id):
+    pass
 
 @app.route('/logout')
 def logout():

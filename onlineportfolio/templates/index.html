@@ -79,7 +79,15 @@
                   <div class="parcial">
                     <div class="info">
                       <div class="name">{{ skill.skill_name }}</div>
-                      <div class="percentagem-num">{{ skill.proficiency_level }}</div>
+                      <div class="percentagem-num">
+                        {% if skill.proficiency_level > 75 %}
+                          Proficient
+                        {% elif skill.proficiency_level > 50 %}
+                          Competent
+                        {% else %}
+                          Learning
+                        {% endif %}
+                      </div>
                     </div>
                     <div class="progressBar">
                         <div class="percentagem" style="width: {{ skill.proficiency_level }}%;"></div>
@@ -338,7 +346,7 @@
                       <h4>Address</h4>
                       <address>
                         Birmingham, UK<br>
-                        <a href="{{ url_for('address') }}">To request full address click here</a>
+                        <a href="#">To request full address click here</a>
                       </address>
                     </div>
                   </div>
@@ -350,7 +358,7 @@
                     </div>
                     <div class="each-info media-body">
                       <h4>Email</h4>
-                      <a class="emailLink">kunheeha@gmail.com</a>
+                      <a class="emailLink">{{ developer.email }}</a>
                     </div>
                   </div>
                 </div>
@@ -361,7 +369,7 @@
                     </div>
                     <div class="each-info media-body">
                       <h4>Phone</h4>
-                      <a href="tel:+447407316920">+44 7947513711</a>
+                      <a href="tel:{{ developer.phone }}">{{ developer.phone }}</a>
                     </div>
                   </div>
                 </div>
