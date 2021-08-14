@@ -56,7 +56,7 @@ class SoftwareProjectForm(FlaskForm):
     source_code = StringField('Source Code', validators=[DataRequired()])
     windows_file = FileField('Add Windows exe', validators=[FileAllowed(['zip', 'exe'])])
     macos_file = FileField('Add MacOS app', validators=[FileAllowed(['app', 'zip'])])
-    linux_file = FileField('Add User Guide', validators=[FileAllowed(['zip'])])
+    linux_file = FileField('Add Linux file', validators=[FileAllowed(['zip'])])
     description = TextAreaField('Description', validators=[DataRequired()])
     installation_guide = FileField('Add Installation Guide', validators=[FileAllowed(['doc', 'docx', 'pdf'])])
     user_guide = FileField('Add User Guide', validators=[FileAllowed(['doc', 'docx', 'pdf'])])

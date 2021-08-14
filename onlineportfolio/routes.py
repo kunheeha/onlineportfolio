@@ -70,19 +70,24 @@ def downloadfile(project_id, filetype):
         mydirectory = os.path.join(app.root_path, linuxfile)
         return send_file(mydirectory, as_attachment=True)
 
+@app.route('/software/<int:project_id>')
+def downloads(project_id):
+    project = SoftwareProject.query.get_or_404(project_id)
+    return render_template('downloads.html', project=project)
+
 @app.route('/APIProject/<int:project_id>/info')
 def apiprojectinfo(project_id):
-    project = APIProject.query.get(project_id)
+    project = APIProject.query.get_or_404(project_id)
     return render_template('web_info.html', project=project)
 
 @app.route('/SoftwareProject/<int:project_id>/info')
 def softwareprojectinfo(project_id):
-    project = SoftwareProject.query.get(project_id)
+    project = SoftwareProject.query.get_or_404(project_id)
     return render_template('software_info.html', project=project)
 
 @app.route('/WebProject/<int:project_id>/info')
 def webprojectinfo(project_id):
-    project = WebProject.query.get(project_id)
+    project = WebProject.query.get_or_404(project_id)
     return render_template('web_info.html', project=project)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -182,7 +187,7 @@ def admin():
         db.session.commit()
         flash('New Skill Added', 'success')
 
-    return render_template("admin_test.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform, skills=skills, skillform=skillform, webprojects=webprojects, apiprojects=apiprojects, softwareprojects=softwareprojects)
+    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform, skills=skills, skillform=skillform, webprojects=webprojects, apiprojects=apiprojects, softwareprojects=softwareprojects)
 
 @app.route('/skill/<int:skill_id>/edit', methods=['GET', 'POST'])
 @login_required

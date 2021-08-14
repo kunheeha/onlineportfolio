@@ -234,7 +234,7 @@
                   {% endfor %}
                 </ul>
               </div>
-              <a target="_blank" href="{{ softwareproject.link }}" class="btn btn-fill btn-secondary">Download</a>
+              <a target="_blank" href="{{ url_for('downloads', project_id=softwareproject.id) }}" class="btn btn-fill btn-secondary">Download</a>
               <a target="_blank" href="{{ softwareproject.source_code }}" class="btn btn-outline-secondary">View source code</a>
             </div>
             <div class="col-sm-5">
@@ -379,7 +379,6 @@
                       <h4>Address</h4>
                       <address>
                         Birmingham, UK<br>
-                        <a href="#">To request full address click here</a>
                       </address>
                     </div>
                   </div>

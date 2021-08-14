@@ -1,0 +1,32 @@
+{% extends 'admin_base.html' %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+  <h1>{{ project.name }}</h1>
+  <hr>
+
+      <div class="notes inactiveNote" id="downloads">
+        <article class="media content-section">
+          <div class="media-body">
+            <h2>Downloads</h2>
+            <hr>
+            {% if project.windows_file %}
+              <a href="{{ url_for('downloadfile', project_id=project.id, filetype='windows') }}">Windows</a>
+              <hr>
+            {% endif %}
+            {% if project.macos_file %}
+              <a href="{{ url_for('downloadfile', project_id=project.id, filetype='macos') }}">MacOS</a>
+              <hr>
+            {% endif %}
+            {% if project.linux_file %}
+              <a href="{{ url_for('downloadfile', project_id=project.id, filetype='linux') }}">Linux</a>
+            {% endif %}
+            {% if not project.windows_file and not project.macos_file and not project.linux_file %}
+              <p>No currently available downloads</p>
+            {% endif %}
+            <hr>
+          </div>
+        </article>
+      </div>
+{% endblock %}
