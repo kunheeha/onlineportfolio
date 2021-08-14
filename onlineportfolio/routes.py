@@ -129,15 +129,8 @@ def admin():
 
     cvform = AddCVForm()
     aboutform = AboutForm()
-    viewcvform = ViewCVForm()
     imageform = AddImageForm()
     skillform = SkillForm()
-
-    if viewcvform.cvsubmit.data and viewcvform.validate():
-        me = Person.query.first()
-        cv = me.cv_file
-        mydirectory = os.path.join(app.root_path, 'static/cv')
-        return send_from_directory(directory=mydirectory, filename=cv)
 
     if cvform.validate_on_submit():
         if not current_user.cv_file:
@@ -187,7 +180,7 @@ def admin():
         db.session.commit()
         flash('New Skill Added', 'success')
 
-    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform, skills=skills, skillform=skillform, webprojects=webprojects, apiprojects=apiprojects, softwareprojects=softwareprojects)
+    return render_template("admin.html", aboutform=aboutform, cvform=cvform, imageform=imageform, skills=skills, skillform=skillform, webprojects=webprojects, apiprojects=apiprojects, softwareprojects=softwareprojects)
 
 @app.route('/skill/<int:skill_id>/edit', methods=['GET', 'POST'])
 @login_required

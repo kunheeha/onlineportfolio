@@ -21,6 +21,7 @@
           <hr>
           <p>{{ current_user.personal_statement }}</p>
           <a data-toggle="modal" data-target="#aboutform" href="#">edit about</a>
+          <a data-toggle="modal" data-target="#cvform" href="#">update CV</a>
         </div>
       </div>
     </div>
@@ -200,6 +201,7 @@
     </div>
   </div>
   {% endfor %}
+
   <!-- Add Skill Modal -->
   <div class="modal fade" id="addskillform" tabindex="-1" role="dialog" aria-labelledby="addSkillModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -225,6 +227,7 @@
       </div>
     </div>
   </div>
+
   <!-- Add Profile Photo Modal -->
   <div class="modal fade" id="imageform" tabindex="-1" role="dialog" aria-labelledby="addPhotoModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -252,6 +255,7 @@
       </div>
     </div>
   </div>
+
   <!-- Add Personal Statement Modal -->
   <div class="modal fade" id="aboutform" tabindex="-1" role="dialog" aria-labelledby="editaboutModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -278,6 +282,29 @@
   	      </div>
   	      <div class="modal-footer">
               {{ aboutform.submit(class="btn btn-outline-dark") }}
+  	      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add CV -->
+  <div class="modal fade" id="cvform" tabindex="-1" role="dialog" aria-labelledby="cvformModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cvformModal">Update CV</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="cvform" method="POST" enctype="multipart/form-data">
+          {{ cvform.csrf_token }}
+  	      <div class="modal-body">
+            {{ cvform.cv_file(class="form-control-file") }}
+  	      </div>
+  	      <div class="modal-footer">
+            {{ aboutform.submit(class="btn btn-outline-dark") }}
   	      </div>
         </form>
       </div>
