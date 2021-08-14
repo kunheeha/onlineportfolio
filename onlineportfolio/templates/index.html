@@ -125,7 +125,7 @@
               {% for webproject in webprojects %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 web-apps">
                   <figure>
-                      <img height="100%" src="{{ url_for('static', filename='images/webproject/'+webproject.images+'/preview.jpeg') }}">
+                      <img height="100%" src="{{ url_for('static', filename=webproject.name+'/images/preview.jpeg') }}">
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ webproject.name }}</h5>
@@ -134,7 +134,7 @@
                           {{ skill.name }}
                         {% endfor %}
                       </span>
-                      <a data-fancybox data-src="#{{ webproject.images }}"></a>
+                      <a data-fancybox data-src="#web{{ webproject.id }}"></a>
                     </figcaption>
                   </figure>
                 </div>
@@ -142,16 +142,16 @@
               {% for softwareproject in softwareprojects %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 comp-apps">
                   <figure>
-                      <img height="100%" src="{{ url_for('static', filename='images/softwareproject/'+softwareproject.images+'/preview.jpeg') }}">
+                      <img height="100%" src="{{ url_for('static', filename=softwareproject.name+'/images/preview.jpeg') }}">
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ softwareproject.name }}</h5>
                       <span class="sub-title">
-                        {% for skill in webproject.skills %}
+                        {% for skill in softwareproject.skills %}
                           {{ skill.name }}
                         {% endfor %}
                       </span>
-                      <a data-fancybox data-src="#{{ softwareproject.images }}"></a>
+                      <a data-fancybox data-src="#software{{ softwareproject.id }}"></a>
                     </figcaption>
                   </figure>
                 </div>
@@ -159,16 +159,16 @@
               {% for apiproject in apiprojects %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 apis">
                   <figure>
-                      <img height="100%" src="{{ url_for('static', filename='images/apiproject/'+apiproject.images+'/preview.jpeg') }}">
+                      <img height="100%" src="{{ url_for('static', filename=apiproject.name+'/images/preview.jpeg') }}">
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ apiproject.name }}</h5>
                       <span class="sub-title">
-                        {% for skill in webproject.skills %}
+                        {% for skill in apiproject.skills %}
                           {{ skill.name }}
                         {% endfor %}
                       </span>
-                      <a data-fancybox data-src="#{{ apiproject.images }}"></a>
+                      <a data-fancybox data-src="#api{{ apiproject.id }}"></a>
                     </figcaption>
                   </figure>
                 </div>
@@ -181,7 +181,7 @@
 
     <!-- WebProject Modal -->
     {% for webproject in webprojects %}
-      <div class="portfolio-modal" id="{{ webproject.images }}">
+      <div class="portfolio-modal" id="web{{ webproject.id }}">
         <div class="container">
           <div class="portfolio-modal-inner row">
             <div class="col-sm-7">
@@ -204,7 +204,7 @@
             </div>
             <div class="col-sm-5">
               <div class="portfolio-modal-img">
-                <img width="100%" src="{{ url_for('static', filename='images/webproject/'+webproject.images+'/modalimg.jpeg') }}">
+                <img width="100%" src="{{ url_for('static', filename=webproject.name+'/images/modalimg.jpeg') }}">
               </div>
             </div>
           </div>
@@ -214,7 +214,7 @@
 
     <!-- SoftwareProject Modal -->
     {% for softwareproject in softwareprojects %}
-      <div class="portfolio-modal" id="{{ softwareproject.images }}">
+      <div class="portfolio-modal" id="software{{ softwareproject.id }}">
         <div class="container">
           <div class="portfolio-modal-inner row">
             <div class="col-sm-7">
@@ -239,7 +239,7 @@
             </div>
             <div class="col-sm-5">
               <div class="portfolio-modal-img">
-                <img width="100%" src="{{ url_for('static', filename='images/softwareproject/'+softwareproject.images+'/modalimg.jpeg') }}">
+                <img width="100%" src="{{ url_for('static', filename=softwareproject.name+'/images/modalimg.jpeg') }}">
               </div>
             </div>
           </div>
@@ -249,7 +249,7 @@
 
     <!-- APIProject Modal -->
     {% for apiproject in apiprojects %}
-      <div class="portfolio-modal" id="{{ apiproject.images }}">
+      <div class="portfolio-modal" id="api{{ apiproject.id }}">
         <div class="container">
           <div class="portfolio-modal-inner row">
             <div class="col-sm-7">
@@ -274,7 +274,7 @@
             </div>
             <div class="col-sm-5">
               <div class="portfolio-modal-img">
-                <img width="100%" src="{{ url_for('static', filename='images/apiproject/'+apiproject.images+'/modalimg.jpeg') }}">
+                <img width="100%" src="{{ url_for('static', filename=apiproject.name+'/images/modalimg.jpeg') }}">
               </div>
             </div>
           </div>

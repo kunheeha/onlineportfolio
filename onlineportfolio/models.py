@@ -62,7 +62,6 @@ class APIProject(db.Model):
     description = db.Column(db.Text(), nullable=False)
     user_guide = db.Column(db.String(20), nullable=True)
     upcoming_functionality = db.Column(db.Text(), nullable=True)
-    images = db.Column(db.String(50), nullable=False)
     skills = db.relationship('PSkill', secondary='api_project_skills')
 
 class SoftwareProject(db.Model):
@@ -76,7 +75,6 @@ class SoftwareProject(db.Model):
     installation_guide = db.Column(db.String(20), nullable=True)
     user_guide = db.Column(db.String(20), nullable=True)
     upcoming_functionality = db.Column(db.Text(), nullable=True)
-    images = db.Column(db.String(50), nullable=False)
     skills = db.relationship('PSkill', secondary='software_project_skills')
 
 class WebProject(db.Model):
@@ -87,5 +85,4 @@ class WebProject(db.Model):
     description = db.Column(db.Text(), nullable=False)
     user_guide = db.Column(db.String(20), nullable=True)
     upcoming_functionality = db.Column(db.Text(), nullable=True)
-    images = db.Column(db.String(50), nullable=False)
     skills = db.relationship('PSkill', secondary='web_project_skills')

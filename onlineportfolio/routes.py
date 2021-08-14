@@ -54,6 +54,21 @@ def contact():
             return jsonify(status=False)
 
 
+@app.route('/download/<int:project_id>/<filetype>')
+def downloadfile(project_id, filetype):
+    project = SoftwareProject.query.get(project_id)
+    if filetype == 'windows':
+        windowsfile = f'static/{project.name}/{project.windows_file}'
+        mydirectory = os.path.join(app.root_path, windowsfile)
+        return send_file(mydirectory, as_attachment=True)
+    elif filetype == 'macos':
+        macosfile = f'static/{project.name}/{project.macos_file}'
+        mydirectory = os.path.join(app.root_path, macosfile)
+        return send_file(mydirectory, as_attachment=True)
+    elif filetype == 'linux':
+        linuxfile = f'static/{project.name}/{project.linux_file}'
+        mydirectory = os.path.join(app.root_path, linuxfile)
+        return send_file(mydirectory, as_attachment=True)
 
 @app.route('/APIProject/<int:project_id>/info')
 def apiprojectinfo(project_id):
@@ -103,6 +118,9 @@ def save_profile_photo(form_profile_photo):
 @login_required
 def admin():
     skills = Skill.query.all()
+    apiprojects = APIProject.query.all()
+    webprojects = WebProject.query.all()
+    softwareprojects = SoftwareProject.query.all()
 
     cvform = AddCVForm()
     aboutform = AboutForm()
@@ -164,7 +182,7 @@ def admin():
         db.session.commit()
         flash('New Skill Added', 'success')
 
-    return render_template("admin_test.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform, skills=skills, skillform=skillform)
+    return render_template("admin_test.html", aboutform=aboutform, cvform=cvform, imageform=imageform, viewcvform=viewcvform, skills=skills, skillform=skillform, webprojects=webprojects, apiprojects=apiprojects, softwareprojects=softwareprojects)
 
 @app.route('/skill/<int:skill_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -193,10 +211,65 @@ def save_userguide(projectname, form_user_guide):
     name = f'{projectname}_userguide'
     _, f_ext = os.path.splitext(form_user_guide.filename)
     userguide_fn = name + f_ext
-    userguide_path = os.path.join(app.root_path, 'static/userguides', userguide_fn)
-    form_user_guide.save(userguide_path)
+    userguide_path = os.path.join(app.root_path, f'static/{projectname}', userguide_fn)
+    try:
+        form_user_guide.save(userguide_path)
+    except:
+        path = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{path}/{projectname}')
+        form_user_guide.save(userguide_path)
 
     return userguide_fn
+
+def save_installguide(projectname, form_install_guide):
+    name = f'{projectname}_installguide'
+    _, f_ext = os.path.splitext(form_install_guide.filename)
+    installguide_fn = name + f_ext
+    installguide_path = os.path.join(app.root_path, f'static/{projectname}', installguide_fn)
+    try:
+        form_install_guide.save(installguide_path)
+    except:
+        path = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{path}/{projectname}')
+        form_install_guide.save(installguide_path)
+
+    return installguide_fn
+
+def save_windows(projectname, form_windows_file):
+    windows_fn = form_windows_file.filename
+    path = os.path.join(app.root_path, f'static/{projectname}', windows_fn)
+    try:
+        form_windows_file.save(path)
+    except:
+        newpath = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{newpath}/{projectname}')
+        form_windows_file.save(path)
+
+    return windows_fn
+
+def save_macos(projectname, form_macos_file):
+    macos_fn = form_macos_file.filename
+    path = os.path.join(app.root_path, f'static/{projectname}', macos_fn)
+    try:
+        form_macos_file.save(path)
+    except:
+        newpath = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{newpath}/{projectname}')
+        form_macos_file.save(path)
+
+    return macos_fn
+
+def save_linux(projectname, form_linux_file):
+    linux_fn = form_linux_file.filename
+    path = os.path.join(app.root_path, f'static/{projectname}', linux_fn)
+    try:
+        form_linux_file.save(path)
+    except:
+        newpath = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{newpath}/{projectname}')
+        form_linux_file.save(path)
+
+    return linux_fn
 
 @app.route('/APIProject/add', methods=['GET', 'POST'])
 @login_required
@@ -211,6 +284,8 @@ def apiprojectnew():
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.add(project)
         db.session.commit()
+        newpath = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{newpath}/{project.name}')
         return redirect(url_for('admin'))
     return render_template('web_project_new.html', form=form)
 
@@ -221,13 +296,17 @@ def softwareprojectnew():
     if form.validate_on_submit():
         project = SoftwareProject(name=form.name.data, source_code=form.source_code.data, description=form.description.data)
         if form.windows_file.data:
-            project.windows_file = form.windows_file.data
+            windowsfile = save_windows(form.name.data, form.windows_file.data)
+            project.windows_file = windowsfile
         if form.macos_file.data:
-            project.macos_file = form.macos_file.data
+            macosfile = save_macos(form.name.data, form.macos_file.data)
+            project.macos_file = macosfile
         if form.linux_file.data:
-            project.linux_file = form.linux_file.data
+            linuxfile = save_linux(form.name.data, form.linux_file.data)
+            project.linux_file = linuxfile
         if form.installation_guide.data:
-            project.installation_guide = form.installation_guide.data
+            installguide = save_installguide(form.name.data, form.installation_guide.data)
+            project.installation_guide = installguide
         if form.user_guide.data:
             userguide = save_userguide(form.name.data, form.user_guide.data)
             project.user_guide = userguide 
@@ -235,6 +314,8 @@ def softwareprojectnew():
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.add(project)
         db.session.commit()
+        newpath = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{newpath}/{project.name}')
         return redirect(url_for('admin'))
     return render_template('software_project_new.html', form=form)
 
@@ -251,6 +332,8 @@ def webprojectnew():
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.add(project)
         db.session.commit()
+        newpath = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{newpath}/{project.name}')
         return redirect(url_for('admin'))
     return render_template('web_project_new.html', form=form)
 
@@ -270,7 +353,7 @@ def apiprojectedit(project_id):
                 project.user_guide = userguide 
             elif project.user_guide:
                 user_guide_filename = project.user_guide 
-                path = os.path.join(app.root_path, 'static/userguides', user_guide_filename)
+                path = os.path.join(app.root_path, f'static/{project.name}', user_guide_filename)
                 os.remove(path)
                 userguide = save_userguide(form.name.data, form.user_guide.data)
                 project.user_guide = userguide 
@@ -284,7 +367,7 @@ def apiprojectedit(project_id):
         form.link.data = project.link
         form.description.data = project.description
         form.upcoming_functionality.data = project.upcoming_functionality
-    return render_template('web_project_new.html', form=form)
+    return render_template('web_project_edit.html', form=form, project=project)
 
 @app.route('/SoftwareProject/<int:project_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -295,18 +378,65 @@ def softwareprojectedit(project_id):
         project.name = form.name.data
         project.source_code = form.source_code.data
         project.description = form.description.data
+
+        if form.windows_file.data:
+            if not project.windows_file:
+                windowsfile = save_windows(form.name.data, form.windows_file.data)
+                project.windows_file = windowsfile
+            elif project.windows_file:
+                windows_file_name = project.windows_file
+                path = os.path.join(app.root_path, f'static/{project.name}', windows_file_name)
+                os.remove(path)
+                windowsfile = save_windows(form.name.data, form.windows_file.data)
+                project.windows_file = windowsfile
+
+        if form.macos_file.data:
+            if not project.macos_file:
+                macosfile = save_macos(form.name.data, form.macos_file.data)
+                project.macos_file = macosfile
+            elif project.macos_file:
+                macos_file_name = project.macos_file
+                path = os.path.join(app.root_path, f'static/{project.name}', macos_file_name)
+                os.remove(path)
+                macosfile = save_macos(form.name.data, form.macos_file.data)
+                project.macos_file = macosfile
+
+        if form.linux_file.data:
+            if not project.linux_file:
+                linuxfile = save_linux(form.name.data, form.linux_file.data)
+                project.linux_file = linuxfile
+            elif project.linux_file:
+                linux_file_name = project.linux_file
+                path = os.path.join(app.root_path, f'static/{project.name}', linux_file_name)
+                os.remove(path)
+                linuxfile = save_linux(form.name.data, form.linux_file.data)
+                project.linux_file = linuxfile
+
         if form.user_guide.data:
             if not project.user_guide:
                 userguide = save_userguide(form.name.data, form.user_guide.data)
                 project.user_guide = userguide 
             elif project.user_guide:
                 user_guide_filename = project.user_guide 
-                path = os.path.join(app.root_path, 'static/userguides', user_guide_filename)
+                path = os.path.join(app.root_path, f'static/{project.name}', user_guide_filename)
                 os.remove(path)
                 userguide = save_userguide(form.name.data, form.user_guide.data)
                 project.user_guide = userguide 
+
+        if form.installation_guide.data:
+            if not project.installation_guide:
+                installguide = save_installguide(form.name.data, form.installation_guide.data)
+                project.installation_guide = installguide
+            elif project.installation_guide:
+                installation_guide_filename = project.installation_guide
+                path = os.path.join(app.root_path, f'static/{project.name}', installation_guide_filename)
+                os.remove(path)
+                installguide = save_installguide(form.name.data, form.installation_guide.data)
+                project.installation_guide = installguide
+
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
+
         db.session.commit()
         return redirect(url_for('admin'))
     elif request.method == 'GET':
@@ -332,7 +462,7 @@ def webprojectedit(project_id):
                 project.user_guide = userguide 
             elif project.user_guide:
                 user_guide_filename = project.user_guide 
-                path = os.path.join(app.root_path, 'static/userguides', user_guide_filename)
+                path = os.path.join(app.root_path, f'static/{project.name}', user_guide_filename)
                 os.remove(path)
                 userguide = save_userguide(form.name.data, form.user_guide.data)
                 project.user_guide = userguide 
@@ -346,7 +476,7 @@ def webprojectedit(project_id):
         form.link.data = project.link
         form.description.data = project.description
         form.upcoming_functionality.data = project.upcoming_functionality
-    return render_template('web_project_new.html', form=form)
+    return render_template('web_project_edit.html', form=form, project=project)
 
 @app.route('/logout')
 def logout():

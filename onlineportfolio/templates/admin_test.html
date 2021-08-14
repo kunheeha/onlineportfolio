@@ -43,37 +43,137 @@
       <a data-toggle="modal" data-target="#addskillform" href="">Add Skill</a>
     </div>
   </div><!-- end row -->
+
   <div class="row">
     <div class="col-md-12">
       <h2>Projects</h2>
       <hr>
       <!-- Each Project Category -->
       <div class="row">
-        <!-- for project in projects -->
+
+        <!-- for apiproject in apiprojects -->
+        {% for apiproject in apiprojects %}
         <div class="col mb-4">
           <div class="card">
-            <a class="workspace-link" href="#">
+            <a class="workspace-link" href="{{ url_for('apiprojectedit', project_id=apiproject.id) }}">
               <div class="card-body">
-                <h5 class="card-title">Project Name</h5>
-                <p class="card-text">Project detail}</p>
-                 <p class="text-muted"><small>Project detail</small></p>
+                <h5 class="card-title">{{ apiproject.name }}</h5>
               </div>
             </a>
             <div class="card-footer text-right">
               <div class="dropdown">
                 <a style="cursor:pointer" class="card-link" id="optionsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
                 <div class="dropdown-menu" aria-labelledby="optionsLink">
-                  <a href="#" class="dropdown-item">Edit</a>
-                  <a href="#" class="dropdown-item">Members on workspace</a>
-                  <div class="dropdown-divider"></div>
                   <a href="#" class="dropdown-item">Delete</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {% endfor %}
         <!-- endfor -->
-      </div><!-- end of Project Category row -->
+        <div class="col mb-4">
+          <div class="card">
+            <a class="workspace-link" href="{{ url_for('apiprojectnew') }}">
+              <div class="card-body">
+                <h5 class="card-title">New API Project</h5>
+              </div>
+            </a>
+            <div class="card-footer text-right">
+              <div class="dropdown">
+                <a style="cursor:pointer" class="card-link" id="optionsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                <div class="dropdown-menu" aria-labelledby="optionsLink">
+                  <a href="#" class="dropdown-item">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end of apiprojects row -->
+
+      <div class="row">
+        <!-- for webproject in webprojects -->
+        {% for webproject in webprojects %}
+        <div class="col mb-4">
+          <div class="card">
+            <a class="workspace-link" href="{{ url_for('webprojectedit', project_id=webproject.id) }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ webproject.name }}</h5>
+              </div>
+            </a>
+            <div class="card-footer text-right">
+              <div class="dropdown">
+                <a style="cursor:pointer" class="card-link" id="optionsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                <div class="dropdown-menu" aria-labelledby="optionsLink">
+                  <a href="#" class="dropdown-item">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- endfor -->
+        <div class="col mb-4">
+          <div class="card">
+            <a class="workspace-link" href="{{ url_for('webprojectnew') }}">
+              <div class="card-body">
+                <h5 class="card-title">New Web Project</h5>
+              </div>
+            </a>
+            <div class="card-footer text-right">
+              <div class="dropdown">
+                <a style="cursor:pointer" class="card-link" id="optionsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                <div class="dropdown-menu" aria-labelledby="optionsLink">
+                  <a href="#" class="dropdown-item">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end of webproejcts row -->
+
+      <div class="row">
+        <!-- for softwareproject in softwareprojects -->
+        {% for softwareproject in softwareprojects %}
+        <div class="col mb-4">
+          <div class="card">
+            <a class="workspace-link" href="{{ url_for('softwareprojectedit', project_id=softwareproject.id) }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ softwareproject.name }}</h5>
+              </div>
+            </a>
+            <div class="card-footer text-right">
+              <div class="dropdown">
+                <a style="cursor:pointer" class="card-link" id="optionsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                <div class="dropdown-menu" aria-labelledby="optionsLink">
+                  <a href="#" class="dropdown-item">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- endfor -->
+        <div class="col mb-4">
+          <div class="card">
+            <a class="workspace-link" href="{{ url_for('softwareprojectnew') }}">
+              <div class="card-body">
+                <h5 class="card-title">New Software Project</h5>
+              </div>
+            </a>
+            <div class="card-footer text-right">
+              <div class="dropdown">
+                <a style="cursor:pointer" class="card-link" id="optionsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+                <div class="dropdown-menu" aria-labelledby="optionsLink">
+                  <a href="#" class="dropdown-item">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end softwareprojects row -->
     </div>
   </div><!-- end projects row -->
 
