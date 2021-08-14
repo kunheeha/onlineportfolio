@@ -49,6 +49,8 @@ class APIProjectForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     user_guide = FileField('Add User Guide', validators=[FileAllowed(['doc', 'docx', 'pdf'])])
     upcoming_functionality = TextAreaField('Upcoming Functionality')
+    previewimg = FileField('Add Preview Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    modalimg = FileField('Add Modal Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Save')
 
 class SoftwareProjectForm(FlaskForm):
@@ -61,6 +63,8 @@ class SoftwareProjectForm(FlaskForm):
     installation_guide = FileField('Add Installation Guide', validators=[FileAllowed(['doc', 'docx', 'pdf'])])
     user_guide = FileField('Add User Guide', validators=[FileAllowed(['doc', 'docx', 'pdf'])])
     upcoming_functionality = TextAreaField('Upcoming Functionality')
+    previewimg = FileField('Add Preview Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    modalimg = FileField('Add Modal Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Save')
 
 class WebProjectForm(FlaskForm):
@@ -70,4 +74,6 @@ class WebProjectForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     user_guide = FileField('Add User Guide', validators=[FileAllowed(['doc', 'docx', 'pdf'])])
     upcoming_functionality = TextAreaField('Upcoming Functionality')
+    previewimg = FileField('Add Preview Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    modalimg = FileField('Add Modal Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Save')   

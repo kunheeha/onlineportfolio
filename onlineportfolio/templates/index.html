@@ -122,10 +122,11 @@
           </div>
           <div class="project-gallery col-sm-12">
             <div class="row portfolioContainer">
+
               {% for webproject in webprojects %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 web-apps">
                   <figure>
-                      <img height="100%" src="{{ url_for('static', filename=webproject.name+'/images/preview.jpeg') }}">
+                      <img height="100%" src="{{ url_for('static', filename=webproject.name+'/images/'+webproject.previewimg) }}">
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ webproject.name }}</h5>
@@ -142,7 +143,7 @@
               {% for softwareproject in softwareprojects %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 comp-apps">
                   <figure>
-                      <img height="100%" src="{{ url_for('static', filename=softwareproject.name+'/images/preview.jpeg') }}">
+                      <img height="100%" src="{{ url_for('static', filename=softwareproject.name+'/images/'+softwareproject.previewimg) }}">
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ softwareproject.name }}</h5>
@@ -159,7 +160,7 @@
               {% for apiproject in apiprojects %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 apis">
                   <figure>
-                      <img height="100%" src="{{ url_for('static', filename=apiproject.name+'/images/preview.jpeg') }}">
+                      <img height="100%" src="{{ url_for('static', filename=apiproject.name+'/images/'+apiproject.previewimg) }}">
                     <figcaption>
                       <i class="fa fa-search"></i>
                       <h5 class="title">{{ apiproject.name }}</h5>
@@ -204,7 +205,7 @@
             </div>
             <div class="col-sm-5">
               <div class="portfolio-modal-img">
-                <img width="100%" src="{{ url_for('static', filename=webproject.name+'/images/modalimg.jpeg') }}">
+                <img width="100%" src="{{ url_for('static', filename=webproject.name+'/images/'+webproject.modalimg) }}">
               </div>
             </div>
           </div>
@@ -239,7 +240,7 @@
             </div>
             <div class="col-sm-5">
               <div class="portfolio-modal-img">
-                <img width="100%" src="{{ url_for('static', filename=softwareproject.name+'/images/modalimg.jpeg') }}">
+                <img width="100%" src="{{ url_for('static', filename=softwareproject.name+'/images/'+softwareproject.modalimg) }}">
               </div>
             </div>
           </div>
@@ -274,7 +275,7 @@
             </div>
             <div class="col-sm-5">
               <div class="portfolio-modal-img">
-                <img width="100%" src="{{ url_for('static', filename=apiproject.name+'/images/modalimg.jpeg') }}">
+                <img width="100%" src="{{ url_for('static', filename=apiproject.name+'/images/'+apiproject.modalimg) }}">
               </div>
             </div>
           </div>

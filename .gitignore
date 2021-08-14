@@ -2,7 +2,7 @@ env
 .env
 __pycache__
 .DS_Store
-site.db
+portfolio.db
 migrations
 *.zip
 *.app

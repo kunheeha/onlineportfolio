@@ -269,6 +269,34 @@ def save_linux(projectname, form_linux_file):
 
     return linux_fn
 
+def save_previewimg(projectname, form_previewimg):
+    name = 'previewimg'
+    _, f_ext = os.path.splitext(form_previewimg.filename)
+    previewimg_fn = name + f_ext
+    previewimg_path = os.path.join(app.root_path, f'static/{projectname}/images', previewimg_fn)
+    try:
+        form_previewimg.save(previewimg_path)
+    except:
+        path = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{path}/{projectname}')
+        os.mkdir(f'{path}/{projectname}/images')
+        form_previewimg.save(previewimg_path)
+    return previewimg_fn
+
+def save_modalimg(projectname, form_modalimg):
+    name = 'modalimg'
+    _, f_ext = os.path.splitext(form_modalimg.filename)
+    modalimg_fn = name + f_ext
+    modalimg_path = os.path.join(app.root_path, f'static/{projectname}/images', modalimg_fn)
+    try:
+        form_modalimg.save(modalimg_path)
+    except:
+        path = os.path.join(app.root_path, 'static')
+        os.mkdir(f'{path}/{projectname}')
+        os.mkdir(f'{path}/{projectname}/images')
+        form_modalimg.save(modalimg_path)
+    return modalimg_fn
+
 @app.route('/APIProject/add', methods=['GET', 'POST'])
 @login_required
 def apiprojectnew():
@@ -280,10 +308,14 @@ def apiprojectnew():
             project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
+        if form.previewimg.data:
+            preview_img = save_previewimg(form.name.data, form.previewimg.data)
+            project.previewimg = preview_img
+        if form.modalimg.data:
+            modal_img = save_modalimg(form.name.data, form.modalimg.data)
+            project.modalimg = modal_img
         db.session.add(project)
         db.session.commit()
-        newpath = os.path.join(app.root_path, 'static')
-        os.mkdir(f'{newpath}/{project.name}')
         return redirect(url_for('admin'))
     return render_template('web_project_new.html', form=form)
 
@@ -310,10 +342,14 @@ def softwareprojectnew():
             project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
+        if form.previewimg.data:
+            preview_img = save_previewimg(form.name.data, form.previewimg.data)
+            project.previewimg = preview_img
+        if form.modalimg.data:
+            modal_img = save_modalimg(form.name.data, form.modalimg.data)
+            project.modalimg = modal_img
         db.session.add(project)
         db.session.commit()
-        newpath = os.path.join(app.root_path, 'static')
-        os.mkdir(f'{newpath}/{project.name}')
         return redirect(url_for('admin'))
     return render_template('software_project_new.html', form=form)
 
@@ -328,10 +364,14 @@ def webprojectnew():
             project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
+        if form.previewimg.data:
+            preview_img = save_previewimg(form.name.data, form.previewimg.data)
+            project.previewimg = preview_img
+        if form.modalimg.data:
+            modal_img = save_modalimg(form.name.data, form.modalimg.data)
+            project.modalimg = modal_img
         db.session.add(project)
         db.session.commit()
-        newpath = os.path.join(app.root_path, 'static')
-        os.mkdir(f'{newpath}/{project.name}')
         return redirect(url_for('admin'))
     return render_template('web_project_new.html', form=form)
 
@@ -355,6 +395,29 @@ def apiprojectedit(project_id):
                 os.remove(path)
                 userguide = save_userguide(form.name.data, form.user_guide.data)
                 project.user_guide = userguide 
+
+        if form.previewimg.data:
+            if not project.previewimg:
+                preview_img = save_previewimg(form.name.data, form.previewimg.data)
+                project.previewimg = preview_img
+            elif project.previewimg:
+                previewimg_filename = proejct.previewimg
+                path = os.path.join(app.root_path, f'static/{project.name}/images', previewimg_filename)
+                os.remove(path)
+                preview_img = save_previewimg(form.name.data, form.previewimg.data)
+                project.previewimg = preview_img
+
+        if form.modalimg.data:
+            if not project.modalimg:
+                modal_img = save_modalimg(form.name.data, form.modalimg.data)
+                project.modalimg = modal_img
+            elif project.modalimg:
+                modalimg_filename = proejct.modalimg
+                path = os.path.join(app.root_path, f'static/{project.name}/images', modalimg_filename)
+                os.remove(path)
+                preview_img = save_modalimg(form.name.data, form.modalimg.data)
+                project.modalimg = preview_img
+
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.commit()
@@ -432,6 +495,28 @@ def softwareprojectedit(project_id):
                 installguide = save_installguide(form.name.data, form.installation_guide.data)
                 project.installation_guide = installguide
 
+        if form.previewimg.data:
+            if not project.previewimg:
+                preview_img = save_previewimg(form.name.data, form.previewimg.data)
+                project.previewimg = preview_img
+            elif project.previewimg:
+                previewimg_filename = proejct.previewimg
+                path = os.path.join(app.root_path, f'static/{project.name}/images', previewimg_filename)
+                os.remove(path)
+                preview_img = save_previewimg(form.name.data, form.previewimg.data)
+                project.previewimg = preview_img
+        if form.modalimg.data:
+            if not project.modalimg:
+                modal_img = save_modalimg(form.name.data, form.modalimg.data)
+                project.modalimg = modal_img
+            elif project.modalimg:
+                modalimg_filename = proejct.modalimg
+                path = os.path.join(app.root_path, f'static/{project.name}/images', modalimg_filename)
+                os.remove(path)
+                preview_img = save_modalimg(form.name.data, form.modalimg.data)
+                project.modalimg = preview_img
+
+
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
 
@@ -464,6 +549,29 @@ def webprojectedit(project_id):
                 os.remove(path)
                 userguide = save_userguide(form.name.data, form.user_guide.data)
                 project.user_guide = userguide 
+
+        if form.previewimg.data:
+            if not project.previewimg:
+                preview_img = save_previewimg(form.name.data, form.previewimg.data)
+                project.previewimg = preview_img
+            elif project.previewimg:
+                previewimg_filename = proejct.previewimg
+                path = os.path.join(app.root_path, f'static/{project.name}/images', previewimg_filename)
+                os.remove(path)
+                preview_img = save_previewimg(form.name.data, form.previewimg.data)
+                project.previewimg = preview_img
+
+        if form.modalimg.data:
+            if not project.modalimg:
+                modal_img = save_modalimg(form.name.data, form.modalimg.data)
+                project.modalimg = modal_img
+            elif project.modalimg:
+                modalimg_filename = proejct.modalimg
+                path = os.path.join(app.root_path, f'static/{project.name}/images', modalimg_filename)
+                os.remove(path)
+                preview_img = save_modalimg(form.name.data, form.modalimg.data)
+                project.modalimg = preview_img
+
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.commit()

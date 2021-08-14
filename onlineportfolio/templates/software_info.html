@@ -107,19 +107,23 @@
             </div>
           </div>
 
-          <!-- Installation guide toggle -->
-          <div class="list-group-item list-group-item-action allNotes" data-noteid="installation">
-            <div class="d-flex justify-content-between align-items-center">
-              <p>Installation Guide</p>
+          {% if project.installation_guide %}
+            <!-- Installation guide toggle -->
+            <div class="list-group-item list-group-item-action allNotes" data-noteid="installation">
+              <div class="d-flex justify-content-between align-items-center">
+                <p>Installation Guide</p>
+              </div>
             </div>
-          </div>
+          {% endif %}
 
-          <!-- User Guide toggle -->
-          <div class="list-group-item list-group-item-action allNotes" data-noteid="userguide">
-            <div class="d-flex justify-content-between align-items-center">
-              <p>User Guide</p>
+          {% if project.user_guide %}
+            <!-- User Guide toggle -->
+            <div class="list-group-item list-group-item-action allNotes" data-noteid="userguide">
+              <div class="d-flex justify-content-between align-items-center">
+                <p>User Guide</p>
+              </div>
             </div>
-          </div>
+          {% endif %}
 
           <!-- Upcoming Functionality toggle -->
           <div class="list-group-item list-group-item-action allNotes" data-noteid="updates">
