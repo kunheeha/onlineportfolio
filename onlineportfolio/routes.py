@@ -1,7 +1,7 @@
 import os
 import secrets
 import random
-from flask import render_template, request, url_for, flash, redirect, send_from_directory, jsonify
+from flask import render_template, request, url_for, flash, redirect, send_from_directory, jsonify, send_file
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 from onlineportfolio import app, db, bcrypt, mail
@@ -21,9 +21,9 @@ def index():
 
 
     if viewcvform.cvsubmit.data and viewcvform.validate():
-        cv = developer.cv_file
-        mydirectory = os.path.join(app.root_path, 'static/cv')
-        return send_from_directory(directory=mydirectory, filename=cv)
+        cv = f'static/cv/{developer.cv_file}'
+        mydirectory = os.path.join(app.root_path, cv)
+        return send_file(mydirectory, as_attachment=True)
 
     return render_template("index.html", viewcvform=viewcvform, developer=developer, profile_photo=profile_photo, skills=skills, softwareprojects=softwareprojects, webprojects=webprojects, apiprojects=apiprojects)
 
@@ -52,6 +52,8 @@ def contact():
 
         except:
             return jsonify(status=False)
+
+
 
 @app.route('/APIProject/<int:project_id>/info')
 def apiprojectinfo(project_id):
@@ -95,7 +97,7 @@ def save_profile_photo(form_profile_photo):
     profile_photo_path = os.path.join(app.root_path, 'static/images', profile_photo_fn)
     form_profile_photo.save(profile_photo_path)
 
-    return cv_fn
+    return profile_photo_fn
 
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required
@@ -187,6 +189,15 @@ def skilldelete(skill_id):
     db.session.commit()
     return redirect(url_for('admin'))
 
+def save_userguide(projectname, form_user_guide):
+    name = f'{projectname}_userguide'
+    _, f_ext = os.path.splitext(form_user_guide.filename)
+    userguide_fn = name + f_ext
+    userguide_path = os.path.join(app.root_path, 'static/userguides', userguide_fn)
+    form_user_guide.save(userguide_path)
+
+    return userguide_fn
+
 @app.route('/APIProject/add', methods=['GET', 'POST'])
 @login_required
 def apiprojectnew():
@@ -194,7 +205,8 @@ def apiprojectnew():
     if form.validate_on_submit():
         project = APIProject(name=form.name.data, source_code=form.source_code.data, link=form.link.data, description=form.description.data)
         if form.user_guide.data:
-            project.user_guide = form.user_guide.data
+            userguide = save_userguide(form.name.data, form.user_guide.data)
+            project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.add(project)
@@ -217,7 +229,8 @@ def softwareprojectnew():
         if form.installation_guide.data:
             project.installation_guide = form.installation_guide.data
         if form.user_guide.data:
-            project.user_guide = form.user_guide.data
+            userguide = save_userguide(form.name.data, form.user_guide.data)
+            project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.add(project)
@@ -232,7 +245,8 @@ def webprojectnew():
     if form.validate_on_submit():
         project = WebProject(name=form.name.data, source_code=form.source_code.data, link=form.link.data, description=form.description.data)
         if form.user_guide.data:
-            project.user_guide = form.user_guide.data
+            userguide = save_userguide(form.name.data, form.user_guide.data)
+            project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.add(project)
@@ -240,7 +254,7 @@ def webprojectnew():
         return redirect(url_for('admin'))
     return render_template('web_project_new.html', form=form)
 
-@app.route('/APIProject/<int:project_id>/edit')
+@app.route('/APIProject/<int:project_id>/edit', methods=['GET', 'POST'])
 @login_required
 def apiprojectedit(project_id):
     project = APIProject.query.get_or_404(project_id)
@@ -251,7 +265,15 @@ def apiprojectedit(project_id):
         project.link = form.link.data
         project.description = form.description.data
         if form.user_guide.data:
-            project.user_guide = form.user_guide.data
+            if not project.user_guide:
+                userguide = save_userguide(form.name.data, form.user_guide.data)
+                project.user_guide = userguide 
+            elif project.user_guide:
+                user_guide_filename = project.user_guide 
+                path = os.path.join(app.root_path, 'static/userguides', user_guide_filename)
+                os.remove(path)
+                userguide = save_userguide(form.name.data, form.user_guide.data)
+                project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.commit()
@@ -264,7 +286,7 @@ def apiprojectedit(project_id):
         form.upcoming_functionality.data = project.upcoming_functionality
     return render_template('web_project_new.html', form=form)
 
-@app.route('/SoftwareProject/<int:project_id>/edit')
+@app.route('/SoftwareProject/<int:project_id>/edit', methods=['GET', 'POST'])
 @login_required
 def softwareprojectedit(project_id):
     project = SoftwareProject.query.get_or_404(project_id)
@@ -273,6 +295,16 @@ def softwareprojectedit(project_id):
         project.name = form.name.data
         project.source_code = form.source_code.data
         project.description = form.description.data
+        if form.user_guide.data:
+            if not project.user_guide:
+                userguide = save_userguide(form.name.data, form.user_guide.data)
+                project.user_guide = userguide 
+            elif project.user_guide:
+                user_guide_filename = project.user_guide 
+                path = os.path.join(app.root_path, 'static/userguides', user_guide_filename)
+                os.remove(path)
+                userguide = save_userguide(form.name.data, form.user_guide.data)
+                project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.commit()
@@ -284,7 +316,7 @@ def softwareprojectedit(project_id):
         form.upcoming_functionality.data = project.upcoming_functionality
     return render_template('software_project_new.html', form=form)
 
-@app.route('/WebProject/<int:project_id>/edit')
+@app.route('/WebProject/<int:project_id>/edit', methods=['GET', 'POST'])
 @login_required
 def webprojectedit(project_id):
     project = WebProject.query.get_or_404(project_id)
@@ -295,7 +327,15 @@ def webprojectedit(project_id):
         project.link = form.link.data
         project.description = form.description.data
         if form.user_guide.data:
-            project.user_guide = form.user_guide.data
+            if not project.user_guide:
+                userguide = save_userguide(form.name.data, form.user_guide.data)
+                project.user_guide = userguide 
+            elif project.user_guide:
+                user_guide_filename = project.user_guide 
+                path = os.path.join(app.root_path, 'static/userguides', user_guide_filename)
+                os.remove(path)
+                userguide = save_userguide(form.name.data, form.user_guide.data)
+                project.user_guide = userguide 
         if form.upcoming_functionality.data:
             project.upcoming_functionality = form.upcoming_functionality.data
         db.session.commit()
